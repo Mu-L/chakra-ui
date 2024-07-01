@@ -6,6 +6,7 @@ import {
   Field,
   For,
   Input,
+  Label,
   Span,
   Stack,
   useSlotRecipe,
@@ -21,14 +22,17 @@ export default {
 const DemoCheckbox = (props: Checkbox.RootProps) => {
   return (
     <Checkbox.Root {...props}>
-      <Checkbox.Control />
+      <Checkbox.HiddenInput />
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
       <Checkbox.Label>{props.children}</Checkbox.Label>
     </Checkbox.Root>
   )
 }
 
 export const Variants = () => {
-  const recipe = useSlotRecipe("Checkbox")
+  const recipe = useSlotRecipe("checkbox")
   return (
     <PlaygroundTable>
       <thead>
@@ -77,7 +81,7 @@ export const Variants = () => {
 }
 
 export const Sizes = () => {
-  const recipe = useSlotRecipe("Checkbox")
+  const recipe = useSlotRecipe("checkbox")
   return (
     <PlaygroundTable>
       <thead>
@@ -128,6 +132,7 @@ export const WithStates = () => (
 export const WithCustomIcon = () => {
   return (
     <Checkbox.Root>
+      <Checkbox.HiddenInput />
       <Checkbox.Control>
         <Checkbox.Indicator checked={<HiCheck />} />
       </Checkbox.Control>
@@ -140,7 +145,7 @@ export const WithGroup = () => {
   return (
     <Checkbox.Group
       defaultValue={["one", "two"]}
-      onChange={(value) => console.log(value)}
+      onValueChange={(value) => console.log(value)}
     >
       <Stack align="start">
         <DemoCheckbox value="one">One</DemoCheckbox>
@@ -154,14 +159,14 @@ export const WithGroup = () => {
 export const WithForm = () => {
   return (
     <Stack maxW="sm" gap="4">
-      <Field.Root>
-        <Field.Label>User name</Field.Label>
+      <Field>
+        <Label>User name</Label>
         <Input />
-      </Field.Root>
-      <Field.Root>
-        <Field.Label>Password</Field.Label>
+      </Field>
+      <Field>
+        <Label>Password</Label>
         <Input />
-      </Field.Root>
+      </Field>
 
       <DemoCheckbox value="one" alignSelf="flex-start">
         Remember me
@@ -170,6 +175,19 @@ export const WithForm = () => {
       <Button alignSelf="flex-start" variant="solid" mt="3">
         Submit
       </Button>
+    </Stack>
+  )
+}
+
+export const WithIndeterminate = () => {
+  return (
+    <Stack>
+      <DemoCheckbox defaultChecked="indeterminate" variant="outline">
+        Indeterminate
+      </DemoCheckbox>
+      <DemoCheckbox defaultChecked="indeterminate" variant="subtle">
+        Indeterminate
+      </DemoCheckbox>
     </Stack>
   )
 }

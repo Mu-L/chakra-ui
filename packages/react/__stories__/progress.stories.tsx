@@ -35,7 +35,7 @@ const DemoProgress = (props: Progress.RootProps) => {
 }
 
 export const Variants = () => {
-  const recipe = useSlotRecipe("Progress")
+  const recipe = useSlotRecipe("progress")
   return (
     <PlaygroundTable>
       <thead>
@@ -61,14 +61,14 @@ export const Variants = () => {
                       <DemoProgress
                         colorPalette={c}
                         variant={v}
-                        hasStripe
+                        striped
                         value={65}
                       />
                       <DemoProgress
                         colorPalette={c}
                         variant={v}
-                        hasStripe
-                        isAnimated
+                        striped
+                        animated
                         value={65}
                       />
                     </Stack>
@@ -84,7 +84,7 @@ export const Variants = () => {
 }
 
 export const Sizes = () => {
-  const recipe = useSlotRecipe("Progress")
+  const recipe = useSlotRecipe("progress")
   return (
     <PlaygroundTable>
       <thead>

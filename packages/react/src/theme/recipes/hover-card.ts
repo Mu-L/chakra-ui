@@ -17,29 +17,31 @@ export const hoverCardSlotRecipe = defineSlotRecipe({
       width: "xs",
       borderRadius: "var(--hovercard-radius)",
       zIndex: "inherit",
-      _focusVisible: {
-        outline: 0,
-      },
+      transformOrigin: "var(--transform-origin)",
+      outline: 0,
       _open: {
-        "--enter-opacity": "1",
-        "--enter-scale": "0.95",
-        animation: "enter 0.2s cubic-bezier(0, 0, 0.2, 1)",
+        motionStyle: "scale-fade-in",
+        animationDuration: "normal",
+        // TODO: tokenize
+        animationTimingFunction: "cubic-bezier(0, 0, 0.2, 1)",
       },
       _closed: {
-        "--exit-opacity": "0",
-        "--exit-scale": "0.95",
-        animation: "exit 0.1s cubic-bezier(0.4, 0, 1, 1)",
+        motionStyle: "scale-fade-out",
+        animationDuration: "faster",
+        // TODO: tokenize
+        animationTimingFunction: "cubic-bezier(0.4, 0, 1, 1)",
       },
     },
     arrow: {
       "--arrow-size": "sizes.3",
-      "--arrow-background": "var(--hovercard-bg)",
+      "--arrow-bg": "var(--hovercard-bg)",
     },
     arrowTip: {
       borderTopWidth: "1px",
       borderInlineStartWidth: "1px",
     },
   },
+
   variants: {
     size: {
       xs: {
@@ -68,6 +70,7 @@ export const hoverCardSlotRecipe = defineSlotRecipe({
       },
     },
   },
+
   defaultVariants: {
     size: "md",
   },

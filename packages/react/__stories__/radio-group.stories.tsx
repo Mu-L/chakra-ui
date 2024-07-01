@@ -5,11 +5,12 @@ import {
   For,
   HStack,
   Input,
+  Label,
+  RadioGroup,
   Span,
   Stack,
   useSlotRecipe,
 } from "../src"
-import { RadioGroup } from "../src/components/radio-group"
 import { colorPalettes } from "./shared/color-palettes"
 import { PlaygroundTable } from "./shared/playground-table"
 
@@ -18,18 +19,30 @@ export default {
   decorators: [(story: Function) => <Box padding="40px">{story()}</Box>],
 }
 
-const DemoRadio = (props: RadioGroup.ItemProps) => {
+const RadioItem = (props: RadioGroup.ItemProps) => {
   const { children, ...rest } = props
   return (
     <RadioGroup.Item {...rest}>
-      <RadioGroup.ItemControl />
+      <RadioGroup.ItemHiddenInput />
+      <RadioGroup.ItemIndicator />
       <RadioGroup.ItemText>{children}</RadioGroup.ItemText>
     </RadioGroup.Item>
   )
 }
 
+export const Basic = () => {
+  return (
+    <RadioGroup.Root defaultValue="1" colorPalette="red">
+      <HStack gap="4">
+        <RadioItem value="1">Radio One</RadioItem>
+        <RadioItem value="2">Radio Two</RadioItem>
+      </HStack>
+    </RadioGroup.Root>
+  )
+}
+
 export const Variants = () => {
-  const recipe = useSlotRecipe("Radio")
+  const recipe = useSlotRecipe("radioGroup")
   return (
     <PlaygroundTable>
       <thead>
@@ -50,14 +63,16 @@ export const Variants = () => {
               <For each={recipe.variantMap.variant}>
                 {(v) => (
                   <td>
-                    <RadioGroup.Root defaultValue="1" minWidth="200px">
+                    <RadioGroup.Root
+                      defaultValue="1"
+                      colorPalette={c}
+                      variant={v}
+                      readOnly
+                      minWidth="200px"
+                    >
                       <HStack gap="4">
-                        <DemoRadio colorPalette={c} variant={v} value="1">
-                          Radio
-                        </DemoRadio>
-                        <DemoRadio colorPalette={c} variant={v} value="2">
-                          Radio
-                        </DemoRadio>
+                        <RadioItem value="1">Radio</RadioItem>
+                        <RadioItem value="2">Radio</RadioItem>
                       </HStack>
                     </RadioGroup.Root>
                   </td>
@@ -72,7 +87,7 @@ export const Variants = () => {
 }
 
 export const Sizes = () => {
-  const recipe = useSlotRecipe("Radio")
+  const recipe = useSlotRecipe("radioGroup")
   return (
     <PlaygroundTable>
       <thead>
@@ -93,14 +108,15 @@ export const Sizes = () => {
               <For each={recipe.variantMap.size}>
                 {(v) => (
                   <td>
-                    <RadioGroup.Root defaultValue="1" minWidth="200px">
+                    <RadioGroup.Root
+                      colorPalette={c}
+                      size={v}
+                      defaultValue="1"
+                      minWidth="200px"
+                    >
                       <HStack gap="4">
-                        <DemoRadio colorPalette={c} size={v} value="1">
-                          Radio
-                        </DemoRadio>
-                        <DemoRadio colorPalette={c} size={v} value="2">
-                          Radio
-                        </DemoRadio>
+                        <RadioItem value="1">Radio</RadioItem>
+                        <RadioItem value="2">Radio</RadioItem>
                       </HStack>
                     </RadioGroup.Root>
                   </td>
@@ -117,21 +133,21 @@ export const Sizes = () => {
 export const WithForm = () => {
   return (
     <Stack maxW="sm" gap="4">
-      <Field.Root>
-        <Field.Label>Name</Field.Label>
+      <Field>
+        <Label>Name</Label>
         <Input />
-      </Field.Root>
+      </Field>
 
-      <Field.Root>
-        <Field.Label>What's your favorite Anime?</Field.Label>
+      <Field>
+        <Label>What's your favorite Anime?</Label>
         <RadioGroup.Root defaultValue="1">
           <Stack gap="2">
-            <DemoRadio value="1">Naruto</DemoRadio>
-            <DemoRadio value="2">Dragon Ball</DemoRadio>
-            <DemoRadio value="3">One Piece</DemoRadio>
+            <RadioItem value="1">Naruto</RadioItem>
+            <RadioItem value="2">Dragon Ball</RadioItem>
+            <RadioItem value="3">One Piece</RadioItem>
           </Stack>
         </RadioGroup.Root>
-      </Field.Root>
+      </Field>
 
       <Button alignSelf="flex-start" variant="solid" mt="3">
         Submit

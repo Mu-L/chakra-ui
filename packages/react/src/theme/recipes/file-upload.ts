@@ -1,8 +1,8 @@
-import { fileUploadAnatomy } from "@ark-ui/anatomy"
+import { anatomy } from "@ark-ui/anatomy/file-upload"
 import { defineSlotRecipe } from "../../styled-system"
 
 export const fileUploadSlotRecipe = defineSlotRecipe({
-  slots: fileUploadAnatomy.keys(),
+  slots: anatomy.keys(),
   base: {
     root: {
       display: "flex",
@@ -15,30 +15,30 @@ export const fileUploadSlotRecipe = defineSlotRecipe({
       fontSize: "sm",
     },
     dropzone: {
-      alignItems: "center",
-      background: "bg.default",
-      borderRadius: "l3",
+      background: "bg",
+      borderRadius: "md",
       borderWidth: "1px",
+      borderStyle: "dashed",
       display: "flex",
+      alignItems: "center",
       flexDirection: "column",
       gap: "3",
       justifyContent: "center",
       minHeight: "xs",
       px: "6",
       py: "4",
+      focusRing: "extend",
     },
     item: {
-      animation: "fadeIn 0.25s ease-out",
-      background: "bg.default",
-      borderRadius: "l3",
+      fontSize: "sm",
+      animationName: "fade-in",
+      animationDuration: "normal",
+      background: "bg",
+      borderRadius: "sm",
       borderWidth: "1px",
-      columnGap: "3",
-      display: "grid",
-      gridTemplateColumns: "auto 1fr auto",
-      gridTemplateAreas: `
-          "preview name delete"
-          "preview size delete"
-          `,
+      display: "flex",
+      alignItems: "center",
+      gap: "3",
       p: "4",
     },
     itemGroup: {
@@ -47,28 +47,20 @@ export const fileUploadSlotRecipe = defineSlotRecipe({
       gap: "3",
     },
     itemName: {
-      color: "fg.default",
+      color: "fg",
       fontWeight: "medium",
-      gridArea: "name",
-      fontSize: "sm",
     },
     itemSizeText: {
-      color: "fg.muted",
-      gridArea: "size",
-      fontSize: "sm",
+      color: "fg.subtle",
+      fontSize: "xs",
     },
     itemDeleteTrigger: {
       alignSelf: "flex-start",
-      gridArea: "delete",
-    },
-    itemPreview: {
-      gridArea: "preview",
     },
     itemPreviewImage: {
-      aspectRatio: "1",
+      width: "10",
       height: "10",
       objectFit: "scale-down",
-      width: "10",
     },
   },
 })

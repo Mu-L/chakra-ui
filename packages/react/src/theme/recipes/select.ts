@@ -5,7 +5,7 @@ export const selectSlotRecipe = defineSlotRecipe({
   slots: selectAnatomy.keys(),
   base: {
     root: {
-      colorPalette: "accent",
+      colorPalette: "gray",
       display: "flex",
       flexDirection: "column",
       gap: "1.5",
@@ -15,43 +15,51 @@ export const selectSlotRecipe = defineSlotRecipe({
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      bg: "bg",
       width: "full",
+      userSelect: "none",
       _placeholderShown: {
         color: "fg.subtle",
       },
       _disabled: {
-        cursor: "not-allowed",
-        opacity: "0.5",
+        layerStyle: "disabled",
       },
-      _focusVisible: {
-        outline: "2px solid",
-        outlineColor: "colorPalette.500",
-        outlineOffset: "2px",
+      _invalid: {
+        borderColor: "var(--error-color)",
+      },
+      focusRing: "extend",
+    },
+    indicator: {
+      "& svg": {
+        width: "4",
+        height: "4",
       },
     },
     content: {
-      background: "bg",
-      borderRadius: "l2",
-      boxShadow: "sm",
+      background: "bg.panel",
       display: "flex",
       flexDirection: "column",
       zIndex: "dropdown",
-      minW: "12rem",
+      outline: 0,
+      maxH: "96",
+      overflowY: "auto",
       _open: {
-        animation: "fade-in 0.25s",
+        motionStyle: "slide-fade-in",
+        animationDuration: "faster",
       },
-      _focusVisible: {
-        outline: "0",
+      _closed: {
+        animationName: "fade-out",
+        animationDuration: "0.01s",
       },
     },
     item: {
       position: "relative",
-      display: "flex",
-      width: "full",
-      alignItems: "center",
-      borderRadius: "l1",
       userSelect: "none",
+      display: "flex",
+      alignItems: "center",
+      gap: "2",
+      justifyContent: "space-between",
+      flex: "1",
+      textAlign: "start",
       _highlighted: {
         bg: "bg.muted",
       },
@@ -59,37 +67,87 @@ export const selectSlotRecipe = defineSlotRecipe({
         pointerEvents: "none",
         opacity: "0.5",
       },
+      "& :where(svg)": {
+        width: "4",
+        height: "4",
+      },
+    },
+    itemText: {
+      flex: "1",
     },
     itemGroupLabel: {
-      fontWeight: "semibold",
-      textStyle: "sm",
+      fontWeight: "medium",
     },
     label: {
-      color: "fg",
       fontWeight: "medium",
+      userSelect: "none",
     },
     valueText: {
       lineClamp: "1",
     },
   },
+
   variants: {
     variant: {
       outline: {
         trigger: {
           borderWidth: "1px",
+          borderColor: "inherit",
+          bg: "bg",
+          _hover: {
+            bg: { base: "colorPalette.50", _dark: "colorPalette.400/10" },
+          },
+          _expanded: {
+            bg: { base: "colorPalette.50", _dark: "colorPalette.400/10" },
+          },
+        },
+      },
+      filled: {
+        trigger: {
+          borderWidth: "1px",
+          borderColor: "transparent",
+          bg: { base: "gray.100", _dark: "gray.800" },
         },
       },
     },
+
     size: {
-      sm: {},
+      sm: {
+        content: {
+          p: "1",
+          rounded: "sm",
+          boxShadow: "md",
+          minW: "12rem",
+          fontSize: "sm",
+        },
+        trigger: {
+          px: "3",
+          h: "8",
+          minW: "8",
+          fontSize: "sm",
+          rounded: "sm",
+          gap: "1",
+        },
+        item: {
+          py: "1",
+          px: "2",
+          rounded: "sm",
+        },
+        itemGroupLabel: {
+          py: "1",
+          px: "2",
+        },
+      },
+
       md: {
         content: {
           p: "1",
-          gap: "1",
           rounded: "md",
+          boxShadow: "sm",
+          minW: "12rem",
+          fontSize: "sm",
         },
         item: {
-          textStyle: "sm",
           py: "1.5",
           px: "2",
           rounded: "sm",
@@ -98,17 +156,10 @@ export const selectSlotRecipe = defineSlotRecipe({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          "& :where(svg)": {
-            width: "4",
-            height: "4",
-          },
         },
         itemGroupLabel: {
-          px: "2",
           py: "1.5",
-        },
-        label: {
-          textStyle: "sm",
+          px: "2",
         },
         trigger: {
           px: "3",
@@ -117,15 +168,34 @@ export const selectSlotRecipe = defineSlotRecipe({
           fontSize: "sm",
           rounded: "md",
           gap: "2",
-          "& :where(svg)": {
-            width: "4",
-            height: "4",
-          },
         },
       },
-      lg: {},
+
+      lg: {
+        content: {
+          p: "2",
+          rounded: "lg",
+          fontSize: "md",
+        },
+        item: {
+          py: "2",
+          px: "3",
+          rounded: "md",
+        },
+        itemGroupLabel: {
+          py: "2",
+          px: "3",
+        },
+        trigger: {
+          fontSize: "md",
+          px: "4",
+          py: "3",
+          rounded: "md",
+        },
+      },
     },
   },
+
   defaultVariants: {
     size: "md",
     variant: "outline",

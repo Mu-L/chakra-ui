@@ -6,6 +6,7 @@ import {
   EMPTY_STYLES,
   type HTMLChakraProps,
   type RecipeProps,
+  type SystemStyleObject,
   type UnstyledProp,
   chakra,
   defineStyle,
@@ -17,11 +18,7 @@ interface SpinnerOptions {
    * The color of the empty area in the spinner
    * @default "transparent"
    */
-  emptyColor?: string
-  /**
-   * The color of the spinner
-   */
-  color?: string
+  emptyColor?: SystemStyleObject["color"]
   /**
    * The thickness of the spinner
    * @default "2px"
@@ -51,7 +48,7 @@ interface SpinnerOptions {
 export interface SpinnerProps
   extends HTMLChakraProps<"div", SpinnerOptions>,
     UnstyledProp,
-    RecipeProps<"Spinner"> {}
+    RecipeProps<"spinner"> {}
 
 /**
  * Spinner is used to indicate the loading state of a page or a component,
@@ -61,7 +58,7 @@ export interface SpinnerProps
  */
 export const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
   function Spinner({ unstyled, ...props }, ref) {
-    const recipe = useRecipe("Spinner", props.recipe)
+    const recipe = useRecipe("spinner", props.recipe)
     const [variantProps, localProps] = recipe.splitVariantProps(props)
     const styles = unstyled ? EMPTY_STYLES : recipe(variantProps)
 

@@ -4,12 +4,16 @@ import {
   Badge,
   Box,
   Button,
+  ErrorMessage,
   Field,
   For,
   Group,
+  HelpText,
   Input,
   InputAddon,
   InputElement,
+  Label,
+  RequiredIndicator,
   Span,
   Stack,
   useRecipe,
@@ -28,7 +32,7 @@ export default {
 }
 
 export const Variants = () => {
-  const recipe = useRecipe("Input")
+  const recipe = useRecipe("input")
   return (
     <PlaygroundTable>
       <tbody>
@@ -62,7 +66,7 @@ export const Variants = () => {
 }
 
 export const Sizes = () => {
-  const recipe = useRecipe("Input")
+  const recipe = useRecipe("input")
   return (
     <PlaygroundTable>
       <tbody>
@@ -91,17 +95,17 @@ export const Sizes = () => {
 export const WithButton = () => {
   return (
     <Stack maxW="sm" gap="4">
-      <Field.Root>
-        <Field.Label>
+      <Field>
+        <Label>
           First Name
-          <Field.RequiredIndicator fallback={<Badge>Optional</Badge>} />
-        </Field.Label>
+          <RequiredIndicator fallback={<Badge>Optional</Badge>} />
+        </Label>
         <Input />
-      </Field.Root>
-      <Field.Root>
-        <Field.Label>Last Name</Field.Label>
+      </Field>
+      <Field>
+        <Label>Last Name</Label>
         <Input />
-      </Field.Root>
+      </Field>
       <Button alignSelf="flex-start" variant="solid" mt="3">
         Submit
       </Button>
@@ -152,14 +156,19 @@ export const WithStates = () => (
   </Stack>
 )
 
-export const WithLabel = () => {
-  return (
-    <Field.Root id="first-name" required>
-      <Field.Label>
-        Amount <Field.RequiredIndicator color="fg.error" />
-      </Field.Label>
-      <Input placeholder="Enter amount" />
-      <Field.HelpText>Keep it very short and sweet!</Field.HelpText>
-    </Field.Root>
-  )
-}
+export const WithFieldLabel = () => (
+  <Field id="first-name" required>
+    <Label>
+      Amount <RequiredIndicator color="fg.error" />
+    </Label>
+    <Input placeholder="Enter amount" />
+    <HelpText>Keep it very short and sweet!</HelpText>
+  </Field>
+)
+
+export const WithFieldInvalid = () => (
+  <Field id="first-name" invalid>
+    <Input placeholder="Enter amount" />
+    <ErrorMessage>Field is required</ErrorMessage>
+  </Field>
+)

@@ -1,20 +1,26 @@
-import { anatomy as parts } from "@ark-ui/anatomy/menu"
+import { anatomy } from "@ark-ui/anatomy/menu"
 import { defineSlotRecipe } from "../../styled-system"
 
 export const menuSlotRecipe = defineSlotRecipe({
-  slots: [...parts.keys(), "itemCommand"],
+  slots: [...anatomy.keys(), "itemCommand"],
   base: {
     content: {
       outline: 0,
       bg: "bg.panel",
       boxShadow: "sm",
       color: "inherit",
-      minW: "8rem",
-      padding: "1",
       zIndex: "dropdown",
       borderRadius: "md",
       overflow: "hidden",
       colorPalette: "gray",
+      _open: {
+        motionStyle: "slide-fade-in",
+        animationDuration: "fast",
+      },
+      _closed: {
+        motionStyle: "slide-fade-out",
+        animationDuration: "faster",
+      },
     },
     item: {
       textDecoration: "none",
@@ -24,15 +30,11 @@ export const menuSlotRecipe = defineSlotRecipe({
       display: "flex",
       alignItems: "center",
       textAlign: "start",
-      gap: "2",
+      position: "relative",
       flex: "0 0 auto",
       outline: 0,
-      fontSize: "sm",
-      borderRadius: "sm",
-      py: "1.5",
-      px: "2",
       _disabled: {
-        opacity: "0.5",
+        layerStyle: "disabled",
       },
     },
     itemText: {
@@ -52,7 +54,9 @@ export const menuSlotRecipe = defineSlotRecipe({
     },
     itemCommand: {
       opacity: "0.6",
-      marginLeft: "auto",
+      ms: "auto",
+      ps: "4",
+      letterSpacing: "0.1em",
     },
     separator: {
       height: "1px",
@@ -61,6 +65,7 @@ export const menuSlotRecipe = defineSlotRecipe({
       mx: "-1",
     },
   },
+
   variants: {
     variant: {
       subtle: {
@@ -79,12 +84,39 @@ export const menuSlotRecipe = defineSlotRecipe({
         },
       },
     },
+
     size: {
-      sm: {},
-      md: {},
+      sm: {
+        content: {
+          minW: "8rem",
+          padding: "1",
+        },
+        item: {
+          gap: "1",
+          fontSize: "xs",
+          borderRadius: "sm",
+          py: "1",
+          px: "1.5",
+        },
+      },
+      md: {
+        content: {
+          minW: "8rem",
+          padding: "1.5",
+        },
+        item: {
+          gap: "2",
+          fontSize: "sm",
+          borderRadius: "sm",
+          py: "1.5",
+          px: "2",
+        },
+      },
     },
   },
+
   defaultVariants: {
+    size: "md",
     variant: "subtle",
     colorPalette: "gray",
   },

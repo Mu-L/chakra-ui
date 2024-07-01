@@ -10,12 +10,12 @@ import {
   chakra,
   useSlotRecipe,
 } from "../../styled-system"
-import { type FieldOptions, splitFieldProps, useField } from "../field"
+import { type FieldOptions, splitFieldProps, useFieldProps } from "../field"
 import { SelectContextProvider, SelectStylesProvider } from "./select-context"
 
 export interface NativeSelectRootProps
   extends HTMLChakraProps<"div">,
-    SlotRecipeProps<"NativeSelect">,
+    SlotRecipeProps<"nativeSelect">,
     FieldOptions,
     UnstyledProp {}
 
@@ -28,15 +28,15 @@ export const NativeSelectRoot = forwardRef<
   HTMLDivElement,
   NativeSelectRootProps
 >(function NativeSelectRoot({ unstyled, ...props }, ref) {
-  const recipe = useSlotRecipe("NativeSelect", props.recipe)
+  const recipe = useSlotRecipe("nativeSelect", props.recipe)
   const [variantProps, localProps] = recipe.splitVariantProps(props)
   const styles = unstyled ? EMPTY_SLOT_STYLES : recipe(variantProps)
 
-  const [fieldProps, rootProps] = splitFieldProps(localProps)
-  const field = useField(fieldProps)
+  const [baseFieldProps, rootProps] = splitFieldProps(localProps)
+  const fieldProps = useFieldProps(baseFieldProps)
 
   return (
-    <SelectContextProvider value={field}>
+    <SelectContextProvider value={fieldProps}>
       <SelectStylesProvider value={styles}>
         <chakra.div
           ref={ref}

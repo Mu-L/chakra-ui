@@ -10,7 +10,7 @@ export default {
 }
 
 export const Variants = () => {
-  const recipe = useRecipe("Skeleton")
+  const recipe = useRecipe("skeleton")
   return (
     <PlaygroundTable>
       <thead>
@@ -55,14 +55,14 @@ export const Variants = () => {
 }
 
 export const WithFade = () => {
-  const [hasLoaded, setHasLoaded] = useState(false)
+  const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    setTimeout(() => setHasLoaded(true), 1000)
+    setTimeout(() => setLoaded(true), 1000)
   }, [])
 
   return (
-    <Skeleton isLoaded={hasLoaded} width="fit-content">
+    <Skeleton loaded={loaded} width="fit-content">
       <span>Chakra ui is cool</span>
     </Skeleton>
   )

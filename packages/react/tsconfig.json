@@ -1,7 +1,10 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["src", "__tests__", "__stories__"],
+  "include": ["**/*.ts", "**/*.tsx", "../../apps/compositions"],
   "compilerOptions": {
-    "customConditions": ["source"]
+    "customConditions": ["source"],
+    "paths": {
+      "compositions/*": ["../../apps/compositions/src/*"]
+    }
   }
 }

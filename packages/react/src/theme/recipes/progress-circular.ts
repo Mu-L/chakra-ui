@@ -1,8 +1,8 @@
-import { progressAnatomy as parts } from "@ark-ui/anatomy"
+import { progressAnatomy } from "@ark-ui/anatomy"
 import { defineSlotRecipe } from "../../styled-system"
 
 export const circularProgressSlotRecipe = defineSlotRecipe({
-  slots: parts.keys(),
+  slots: progressAnatomy.keys(),
   base: {
     root: {
       display: "inline-flex",
@@ -12,7 +12,8 @@ export const circularProgressSlotRecipe = defineSlotRecipe({
     },
     circle: {
       _indeterminate: {
-        animation: "spin 2s linear infinite",
+        animation: "spin",
+        animationDuration: "normal",
       },
     },
     circleTrack: {

@@ -7,20 +7,36 @@ export default {
   decorators: [(story: Function) => <Box padding="4">{story()}</Box>],
 }
 
+export const Basic = () => {
+  return (
+    <Alert.Root>
+      <Alert.Indicator />
+      <Box>
+        <Alert.Title>Alert Title</Alert.Title>
+        <Alert.Description>
+          Chakra UI v3 is the greatest! Check it out.
+        </Alert.Description>
+      </Box>
+    </Alert.Root>
+  )
+}
+
 export const Variants = () => {
-  const recipe = useSlotRecipe("Alert")
+  const recipe = useSlotRecipe("alert")
   return (
     <PlaygroundTable>
       <thead>
         <tr>
           <td />
-          <For each={recipe.variantMap.variant}>{(v) => <td>{v}</td>}</For>
+          <For each={recipe.variantMap.variant}>
+            {(v) => <td key={v}>{v}</td>}
+          </For>
         </tr>
       </thead>
       <tbody>
         <For each={colorPalettes}>
           {(c) => (
-            <tr>
+            <tr key={c}>
               <td>
                 <Span fontSize="sm" color="fg.muted" minW="8ch">
                   {c}
@@ -28,9 +44,9 @@ export const Variants = () => {
               </td>
               <For each={recipe.variantMap.variant}>
                 {(v) => (
-                  <td>
+                  <td key={v}>
                     <Alert.Root variant={v} colorPalette={c}>
-                      <Alert.Icon />
+                      <Alert.Indicator />
                       <Box>
                         <Alert.Title>Alert Title</Alert.Title>
                         <Alert.Description>
@@ -50,19 +66,19 @@ export const Variants = () => {
 }
 
 export const Sizes = () => {
-  const recipe = useSlotRecipe("Alert")
+  const recipe = useSlotRecipe("alert")
   return (
     <PlaygroundTable>
       <thead>
         <tr>
           <td />
-          <For each={recipe.variantMap.size}>{(v) => <td>{v}</td>}</For>
+          <For each={recipe.variantMap.size}>{(v) => <td key={v}>{v}</td>}</For>
         </tr>
       </thead>
       <tbody>
         <For each={colorPalettes}>
           {(c) => (
-            <tr>
+            <tr key={c}>
               <td>
                 <Span fontSize="sm" color="fg.muted" minW="8ch">
                   {c}
@@ -70,9 +86,9 @@ export const Sizes = () => {
               </td>
               <For each={recipe.variantMap.size}>
                 {(v) => (
-                  <td>
+                  <td key={v}>
                     <Alert.Root size={v} colorPalette={c}>
-                      <Alert.Icon />
+                      <Alert.Indicator />
                       <Box>
                         <Alert.Title>Alert Title</Alert.Title>
                         <Alert.Description>
@@ -98,9 +114,9 @@ export const WithSpinner = () => {
       borderStartWidth="3px"
       borderStartColor="colorPalette.600"
     >
-      <Alert.Icon>
+      <Alert.Indicator>
         <Spinner size="sm" />
-      </Alert.Icon>
+      </Alert.Indicator>
       We are loading something
     </Alert.Root>
   )

@@ -155,10 +155,10 @@ describe("css", () => {
       {
         "@media screen and (min-width: 30rem)": {
           "fontSize": "var(--chakra-font-sizes-lg)",
-          "lineHeight": "1.5",
+          "lineHeight": "var(--chakra-line-heights-base)",
         },
         "fontSize": "var(--chakra-font-sizes-sm)",
-        "lineHeight": "1.5",
+        "lineHeight": "var(--chakra-line-heights-base)",
       }
     `)
   })
@@ -303,7 +303,7 @@ describe("css", () => {
   test("token reference", () => {
     const result = css({
       border: {
-        base: "1px solid {colors.primary}",
+        base: "1px solid {colors.white}",
         _dark: "2px solid {colors.green.300}",
       },
     })
@@ -313,7 +313,7 @@ describe("css", () => {
         " &.dark, .dark &": {
           "border": "2px solid var(--chakra-colors-green-300)",
         },
-        "border": "1px solid var(--colors.primary)",
+        "border": "1px solid var(--chakra-colors-white)",
       }
     `)
   })
@@ -356,6 +356,39 @@ describe("css", () => {
         "@media screen and (max-width: 47.9975rem)": {
           "display": "none",
         },
+      }
+    `)
+  })
+
+  test("space x and y", () => {
+    const result = css({
+      spaceX: "2",
+      spaceXReverse: true,
+    })
+
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "& > :not(style, [hidden]) ~ :not(style, [hidden])": {
+          "--space-x-reverse": "1",
+          "marginInlineEnd": "calc(var(--chakra-spacing-2) * var(--space-x-reverse))",
+          "marginInlineStart": "calc(var(--chakra-spacing-2) * calc(1 - var(--space-x-reverse)))",
+        },
+      }
+    `)
+  })
+
+  test("color opacity modifier in css var", () => {
+    const result = css({
+      "--bg": "{colors.red.300/30}",
+      "--color": "{pink/40}",
+      border: "2px solid {colors.red.300}",
+    })
+
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "--bg": "color-mix(in srgb, var(--chakra-colors-red-300) 30%, transparent)",
+        "--color": "color-mix(in srgb, pink 40%, transparent)",
+        "border": "2px solid var(--chakra-colors-red-300)",
       }
     `)
   })

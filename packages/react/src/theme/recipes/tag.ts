@@ -1,11 +1,11 @@
-import { tagAnatomy as parts } from "../../anatomy"
+import { tagAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
 import { badgeRecipe } from "./badge"
 
 const badgeVariant = badgeRecipe.variants?.variant
 
 export const tagSlotRecipe = defineSlotRecipe({
-  slots: parts.keys,
+  slots: tagAnatomy.keys(),
   base: {
     root: {
       colorPalette: "gray",
@@ -14,7 +14,7 @@ export const tagSlotRecipe = defineSlotRecipe({
       alignItems: "center",
       maxWidth: "100%",
       userSelect: "none",
-      borderRadius: "md",
+
       "& svg": {
         fontSize: "md",
       },
@@ -28,10 +28,7 @@ export const tagSlotRecipe = defineSlotRecipe({
       },
     },
     label: {
-      display: "inline-flex",
-      whiteSpace: "nowrap",
-      overflow: "hidden",
-      textOverflow: "ellipsis",
+      lineClamp: "1",
     },
     closeTrigger: {
       display: "flex",
@@ -47,6 +44,7 @@ export const tagSlotRecipe = defineSlotRecipe({
       },
     },
   },
+
   variants: {
     size: {
       sm: {
@@ -55,6 +53,7 @@ export const tagSlotRecipe = defineSlotRecipe({
           minW: "5",
           fontSize: "xs",
           px: "0.5",
+          borderRadius: "sm",
         },
         label: {
           px: "1",
@@ -69,6 +68,7 @@ export const tagSlotRecipe = defineSlotRecipe({
           minW: "6",
           fontSize: "sm",
           px: "0.5",
+          borderRadius: "md",
         },
         label: {
           px: "1.5",
@@ -83,6 +83,7 @@ export const tagSlotRecipe = defineSlotRecipe({
           minW: "8",
           fontSize: "md",
           px: "0.5",
+          borderRadius: "md",
         },
         label: {
           px: "1.5",
@@ -92,6 +93,7 @@ export const tagSlotRecipe = defineSlotRecipe({
         },
       },
     },
+
     variant: {
       subtle: {
         root: badgeVariant?.subtle,
@@ -114,6 +116,7 @@ export const tagSlotRecipe = defineSlotRecipe({
       },
     },
   },
+
   defaultVariants: {
     size: "md",
     variant: "subtle",

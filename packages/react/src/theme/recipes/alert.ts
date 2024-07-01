@@ -1,8 +1,9 @@
-import { alertAnatomy as parts } from "../../anatomy"
+import { alertAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
 
 export const alertSlotRecipe = defineSlotRecipe({
-  slots: parts.keys,
+  slots: alertAnatomy.keys(),
+
   base: {
     root: {
       width: "100%",
@@ -12,7 +13,7 @@ export const alertSlotRecipe = defineSlotRecipe({
       overflow: "hidden",
     },
     title: {
-      fontWeight: "semibold",
+      fontWeight: "medium",
       lineHeight: "1.2",
       marginEnd: "2",
     },
@@ -20,10 +21,12 @@ export const alertSlotRecipe = defineSlotRecipe({
       display: "inline",
       lineHeight: "1.5",
     },
-    icon: {
+    indicator: {
+      display: "inherit",
       flexShrink: 0,
     },
   },
+
   variants: {
     status: {
       info: {
@@ -39,15 +42,17 @@ export const alertSlotRecipe = defineSlotRecipe({
         root: { colorPalette: "red" },
       },
     },
+
     variant: {
       subtle: {
         root: {
           bg: { base: "colorPalette.100", _dark: "colorPalette.400/20" },
         },
-        icon: {
+        indicator: {
           color: { base: "colorPalette.800", _dark: "colorPalette.400" },
         },
       },
+
       outline: {
         root: {
           bg: { base: "colorPalette.50", _dark: "colorPalette.400/10" },
@@ -58,20 +63,22 @@ export const alertSlotRecipe = defineSlotRecipe({
           color: { base: "colorPalette.800", _dark: "colorPalette.200" },
           shadow: "inset 0 0 0px 1px var(--shadow-color)",
         },
-        icon: {
+        indicator: {
           color: { base: "colorPalette.800", _dark: "colorPalette.400" },
         },
       },
+
       solid: {
         root: {
           bg: "colorPalette.600",
           color: "white",
         },
-        icon: {
+        indicator: {
           color: "white",
         },
       },
     },
+
     size: {
       sm: {
         root: {
@@ -81,7 +88,7 @@ export const alertSlotRecipe = defineSlotRecipe({
           rounded: "md",
           fontSize: "xs",
         },
-        icon: {
+        indicator: {
           fontSize: "md",
         },
       },
@@ -93,7 +100,7 @@ export const alertSlotRecipe = defineSlotRecipe({
           rounded: "md",
           fontSize: "sm",
         },
-        icon: {
+        indicator: {
           fontSize: "lg",
         },
       },
@@ -105,12 +112,13 @@ export const alertSlotRecipe = defineSlotRecipe({
           rounded: "lg",
           fontSize: "md",
         },
-        icon: {
+        indicator: {
           fontSize: "lg",
         },
       },
     },
   },
+
   defaultVariants: {
     status: "info",
     variant: "subtle",

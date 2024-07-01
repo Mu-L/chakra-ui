@@ -33,8 +33,10 @@ export type {
 } from "./select"
 
 export { SelectContext as Context } from "@ark-ui/react/select"
+
 export type {
   SelectHighlightChangeDetails as HighlightChangeDetails,
   SelectOpenChangeDetails as OpenChangeDetails,
   SelectValueChangeDetails as ValueChangeDetails,
+  SelectCollectionItem as CollectionItem,
 } from "@ark-ui/react/select"

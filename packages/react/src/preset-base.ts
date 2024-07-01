@@ -1,5 +1,5 @@
 import { createColorMixTransform } from "./styled-system/color-mix"
-import { defineConfig } from "./styled-system/config"
+import { defineConditions, defineConfig } from "./styled-system/config"
 
 const isCssVar = (v: string) => /^var\(--.+\)$/.test(v)
 
@@ -13,126 +13,129 @@ const deg = (v: any) => {
 
 const divideColor = createColorMixTransform("borderColor")
 
+export const defaultConditions = defineConditions({
+  hover: "&:is(:hover, [data-hover]):not(:disabled, [data-disabled])",
+  active:
+    "&:is(:active, [data-active]):not(:disabled, [data-disabled], [data-state=open])",
+  focus: "&:is(:focus, [data-focus])",
+  focusWithin: "&:is(:focus-within, [data-focus-within])",
+  focusVisible: "&:is(:focus-visible, [data-focus-visible])",
+  disabled:
+    "&:is(:disabled, [disabled], [data-disabled], [aria-disabled=true])",
+  visited: "&:visited",
+  target: "&:target",
+  readOnly: "&:is([data-readonly], [aria-readonly=true], [readonly])",
+  readWrite: "&:read-write",
+  empty: "&:is(:empty, [data-empty])",
+  checked:
+    "&:is(:checked, [data-checked], [aria-checked=true], [data-state=checked])",
+  enabled: "&:enabled",
+  expanded:
+    "&:is([aria-expanded=true], [data-expanded], [data-state=expanded])",
+  highlighted: "&[data-highlighted]",
+  complete: "&[data-complete]",
+  incomplete: "&[data-incomplete]",
+
+  before: "&::before",
+  after: "&::after",
+  firstLetter: "&::first-letter",
+  firstLine: "&::first-line",
+  marker: "&::marker",
+  selection: "&::selection",
+  file: "&::file-selector-button",
+  backdrop: "&::backdrop",
+
+  first: "&:first-of-type",
+  last: "&:last-of-type",
+  notFirst: "&:not(:first-of-type)",
+  notLast: "&:not(:last-of-type)",
+  only: "&:only-child",
+  even: "&:nth-of-type(even)",
+  odd: "&:nth-of-type(odd)",
+
+  peerFocus: ".peer:is(:focus, [data-focus]) ~ &",
+  peerHover:
+    ".peer:is(:hover, [data-hover]):not(:disabled, [data-disabled]) ~ &",
+  peerActive:
+    ".peer:is(:active, [data-active]):not(:disabled, [data-disabled]) ~ &",
+  peerFocusWithin: ".peer:focus-within ~ &",
+  peerFocusVisible: ".peer:is(:focus-visible, [data-focus-visible]) ~ &",
+  peerDisabled: ".peer:is(:disabled, [disabled], [data-disabled]) ~ &",
+  peerChecked:
+    ".peer:is(:checked, [data-checked], [aria-checked=true], [data-state=checked]) ~ &",
+  peerInvalid: ".peer:is(:invalid, [data-invalid], [aria-invalid=true]) ~ &",
+  peerExpanded:
+    ".peer:is([aria-expanded=true], [data-expanded], [data-state=expanded]) ~ &",
+  peerPlaceholderShown: ".peer:placeholder-shown ~ &",
+
+  groupFocus: ".group:is(:focus, [data-focus]) &",
+  groupHover:
+    ".group:is(:hover, [data-hover]):not(:disabled, [data-disabled]) &",
+  groupActive:
+    ".group:is(:active, [data-active]):not(:disabled, [data-disabled]) &",
+  groupFocusWithin: ".group:focus-within &",
+  groupFocusVisible: ".group:is(:focus-visible, [data-focus-visible]) &",
+  groupDisabled: ".group:is(:disabled, [disabled], [data-disabled]) &",
+  groupChecked:
+    ".group:is(:checked, [data-checked], [aria-checked=true], [data-state=checked]) &",
+  groupExpanded:
+    ".group:is([aria-expanded=true], [data-expanded], [data-state=expanded]) &",
+  groupInvalid: ".group:invalid &",
+
+  indeterminate:
+    "&:is(:indeterminate, [data-indeterminate], [aria-checked=mixed], [data-state=indeterminate])",
+  required: "&:is([data-required], [aria-required=true])",
+  valid: "&:is([data-valid], [data-state=valid])",
+  invalid: "&:is([data-invalid], [aria-invalid=true], [data-state=invalid])",
+  autofill: "&:autofill",
+  inRange: "&:in-range",
+  outOfRange: "&:out-of-range",
+  placeholder: "&::placeholder, &[data-placeholder]",
+  placeholderShown: "&:is(:placeholder-shown, [data-placeholder-shown])",
+  pressed: "&:is([aria-pressed=true], [data-pressed])",
+  selected: "&:is([aria-selected=true], [data-selected])",
+  grabbed: "&:is([aria-grabbed=true], [data-grabbed])",
+
+  default: "&:default",
+  optional: "&:optional",
+  open: "&:is([open], [data-open], [data-state=open])",
+  closed: "&:is([closed], [data-closed], [data-state=closed])",
+  fullscreen: "&is(:fullscreen, [data-fullscreen])",
+  loading: "&:is([data-loading], [aria-busy=true])",
+  hidden: "&:is([hidden], [data-hidden])",
+
+  current: "&[data-current]",
+  currentPage: "&[aria-current=page]",
+  currentStep: "&[aria-current=step]",
+
+  motionReduce: "@media (prefers-reduced-motion: reduce)",
+  motionSafe: "@media (prefers-reduced-motion: no-preference)",
+  print: "@media print",
+  landscape: "@media (orientation: landscape)",
+  portrait: "@media (orientation: portrait)",
+
+  dark: " &.dark, .dark &",
+  light: " &.light, .light &",
+  mediaDark: "@media (prefers-color-scheme: dark)",
+  mediaLight: "@media (prefers-color-scheme: light)",
+
+  highContrast: "@media (forced-colors: active)",
+  lessContrast: "@media (prefers-contrast: less)",
+  moreContrast: "@media (prefers-contrast: more)",
+
+  ltr: "[dir=ltr] &",
+  rtl: "[dir=rtl] &",
+
+  scrollbar: "&::-webkit-scrollbar",
+  scrollbarThumb: "&::-webkit-scrollbar-thumb",
+  scrollbarTrack: "&::-webkit-scrollbar-track",
+
+  horizontal: "&[data-orientation=horizontal]",
+  vertical: "&[data-orientation=vertical]",
+})
+
 export const defaultBaseConfig = defineConfig({
-  conditions: {
-    hover: "&:is(:hover, [data-hover]):not(:disabled, [data-disabled])",
-    active: "&:is(:active, [data-active]):not(:disabled, [data-disabled])",
-    focus: "&:is(:focus, [data-focus])",
-    focusWithin: "&:is(:focus-within, [data-focus-within])",
-    focusVisible: "&:is(:focus-visible, [data-focus-visible])",
-    disabled:
-      "&:is(:disabled, [disabled], [data-disabled], [aria-disabled=true])",
-    visited: "&:visited",
-    target: "&:target",
-    readOnly: "&:is([data-readonly], [aria-readonly=true], [readonly])",
-    readWrite: "&:read-write",
-    empty: "&:is(:empty, [data-empty])",
-    checked:
-      "&:is(:checked, [data-checked], [aria-checked=true], [data-state=checked])",
-    enabled: "&:enabled",
-    expanded:
-      "&:is([aria-expanded=true], [data-expanded], [data-state=expanded])",
-    highlighted: "&[data-highlighted]",
-    complete: "&[data-complete]",
-    incomplete: "&[data-incomplete]",
-
-    before: "&::before",
-    after: "&::after",
-    firstLetter: "&::first-letter",
-    firstLine: "&::first-line",
-    marker: "&::marker",
-    selection: "&::selection",
-    file: "&::file-selector-button",
-    backdrop: "&::backdrop",
-
-    first: "&:first-of-type",
-    last: "&:last-of-type",
-    notFirst: "&:not(:first-of-type)",
-    notLast: "&:not(:last-of-type)",
-    only: "&:only-child",
-    even: "&:nth-of-type(even)",
-    odd: "&:nth-of-type(odd)",
-
-    peerFocus: ".peer:is(:focus, [data-focus]) ~ &",
-    peerHover:
-      ".peer:is(:hover, [data-hover]):not(:disabled, [data-disabled]) ~ &",
-    peerActive:
-      ".peer:is(:active, [data-active]):not(:disabled, [data-disabled]) ~ &",
-    peerFocusWithin: ".peer:focus-within ~ &",
-    peerFocusVisible: ".peer:is(:focus-visible, [data-focus-visible]) ~ &",
-    peerDisabled: ".peer:is(:disabled, [disabled], [data-disabled]) ~ &",
-    peerChecked:
-      ".peer:is(:checked, [data-checked], [aria-checked=true], [data-state=checked]) ~ &",
-    peerInvalid: ".peer:is(:invalid, [data-invalid], [aria-invalid=true]) ~ &",
-    peerExpanded:
-      ".peer:is([aria-expanded=true], [data-expanded], [data-state=expanded]) ~ &",
-    peerPlaceholderShown: ".peer:placeholder-shown ~ &",
-
-    groupFocus: ".group:is(:focus, [data-focus]) &",
-    groupHover:
-      ".group:is(:hover, [data-hover]):not(:disabled, [data-disabled]) &",
-    groupActive:
-      ".group:is(:active, [data-active]):not(:disabled, [data-disabled]) &",
-    groupFocusWithin: ".group:focus-within &",
-    groupFocusVisible: ".group:is(:focus-visible, [data-focus-visible]) &",
-    groupDisabled: ".group:is(:disabled, [disabled], [data-disabled]) &",
-    groupChecked:
-      ".group:is(:checked, [data-checked], [aria-checked=true], [data-state=checked]) &",
-    groupExpanded:
-      ".group:is([aria-expanded=true], [data-expanded], [data-state=expanded]) &",
-    groupInvalid: ".group:invalid &",
-
-    indeterminate:
-      "&:is(:indeterminate, [data-indeterminate], [aria-checked=mixed], [data-state=indeterminate])",
-    required: "&:is([data-required], [aria-required=true])",
-    valid: "&:is([data-valid], [data-state=valid])",
-    invalid: "&:is([data-invalid], [aria-invalid=true], [data-state=invalid])",
-    autofill: "&:autofill",
-    inRange: "&:in-range",
-    outOfRange: "&:out-of-range",
-    placeholder: "&::placeholder, &[data-placeholder]",
-    placeholderShown: "&:is(:placeholder-shown, [data-placeholder-shown])",
-    pressed: "&:is([aria-pressed=true], [data-pressed])",
-    selected: "&:is([aria-selected=true], [data-selected])",
-    grabbed: "&:is([aria-grabbed=true], [data-grabbed])",
-
-    default: "&:default",
-    optional: "&:optional",
-    open: "&:is([open], [data-open], [data-state=open])",
-    closed: "&:is([closed], [data-closed], [data-state=closed])",
-    fullscreen: "&is(:fullscreen, [data-fullscreen])",
-    loading: "&:is([data-loading], [aria-busy=true])",
-    hidden: "&:is([hidden], [data-hidden])",
-
-    current: "&[data-current]",
-    currentPage: "&[aria-current=page]",
-    currentStep: "&[aria-current=step]",
-
-    motionReduce: "@media (prefers-reduced-motion: reduce)",
-    motionSafe: "@media (prefers-reduced-motion: no-preference)",
-    print: "@media print",
-    landscape: "@media (orientation: landscape)",
-    portrait: "@media (orientation: portrait)",
-
-    dark: " &.dark, .dark &",
-    light: " &.light, .light &",
-    mediaDark: "@media (prefers-color-scheme: dark)",
-    mediaLight: "@media (prefers-color-scheme: light)",
-
-    highContrast: "@media (forced-colors: active)",
-    lessContrast: "@media (prefers-contrast: less)",
-    moreContrast: "@media (prefers-contrast: more)",
-
-    ltr: "[dir=ltr] &",
-    rtl: "[dir=rtl] &",
-
-    scrollbar: "&::-webkit-scrollbar",
-    scrollbarThumb: "&::-webkit-scrollbar-thumb",
-    scrollbarTrack: "&::-webkit-scrollbar-track",
-
-    horizontal: "&[data-orientation=horizontal]",
-    vertical: "&[data-orientation=vertical]",
-  },
+  conditions: defaultConditions,
   utilities: {
     // background
     background: {
@@ -444,7 +447,10 @@ export const defaultBaseConfig = defineConfig({
         }
       },
     },
-    blur: { transform: (v) => ({ "--blur": wrap("blur", v) }) },
+    blur: {
+      values: "blurs",
+      transform: (v) => ({ "--blur": wrap("blur", v) }),
+    },
     brightness: {
       transform: (v) => ({ "--brightness": wrap("brightness", v) }),
     },
@@ -525,13 +531,49 @@ export const defaultBaseConfig = defineConfig({
       values: "colors",
       transform: createColorMixTransform("outlineColor"),
     },
+    focusRing: {
+      values: ["extend", "contain"],
+      transform(value: any, { token }: any) {
+        const focusRingColor = token("colors.border.emphasized")
+        const styles: Record<string, any> = {
+          contain: {
+            "--focus-ring-color": focusRingColor,
+            "&:where(:focus-visible, [data-focus])": {
+              outlineWidth: "1px",
+              outlineColor: "var(--focus-ring-color)",
+              outlineStyle: "solid",
+              borderColor: "var(--focus-ring-color)",
+            },
+          },
+          extend: {
+            "--focus-ring-color": focusRingColor,
+            "&:where(:focus-visible, [data-focus])": {
+              outlineWidth: "2px",
+              outlineOffset: "2px",
+              outlineColor: "var(--focus-ring-color)",
+              outlineStyle: "solid",
+            },
+          },
+        }
+
+        return styles[value]
+      },
+    },
+    focusRingColor: {
+      values: "colors",
+      transform: createColorMixTransform("--focus-ring-color"),
+    },
     // layout
     aspectRatio: { values: "aspectRatios" },
     width: { values: "sizes", shorthand: ["w"] },
     inlineSize: { values: "sizes" },
     height: { values: "sizes", shorthand: ["h"] },
     blockSize: { values: "sizes" },
-    boxSize: { values: "sizes", transform: (v) => ({ width: v, height: v }) },
+    boxSize: {
+      values: "sizes",
+      property: "width",
+      transform: (v) => ({ width: v, height: v }),
+    },
     minWidth: { values: "sizes", shorthand: ["minW"] },
     minInlineSize: { values: "sizes" },
     minHeight: { values: "sizes", shorthand: ["minH"] },
@@ -684,6 +726,48 @@ export const defaultBaseConfig = defineConfig({
         }
       },
     },
+    spaceXReverse: {
+      values: { type: "boolean" },
+      transform(value) {
+        return {
+          "& > :not(style, [hidden]) ~ :not(style, [hidden])": {
+            "--space-x-reverse": value ? "1" : undefined,
+          },
+        }
+      },
+    },
+    spaceX: {
+      property: "marginInlineStart",
+      values: "spacing",
+      transform: (v) => ({
+        "& > :not(style, [hidden]) ~ :not(style, [hidden])": {
+          "--space-x-reverse": "0",
+          marginInlineStart: `calc(${v} * calc(1 - var(--space-x-reverse)))`,
+          marginInlineEnd: `calc(${v} * var(--space-x-reverse))`,
+        },
+      }),
+    },
+    spaceYReverse: {
+      values: { type: "boolean" },
+      transform(value) {
+        return {
+          "& > :not(style, [hidden]) ~ :not(style, [hidden])": {
+            "--space-y-reverse": value ? "1" : undefined,
+          },
+        }
+      },
+    },
+    spaceY: {
+      property: "marginTop",
+      values: "spacing",
+      transform: (v) => ({
+        "& > :not(style, [hidden]) ~ :not(style, [hidden])": {
+          "--space-y-reverse": "0",
+          marginTop: `calc(${v} * calc(1 - var(--space-y-reverse)))`,
+          marginBottom: `calc(${v} * var(--space-y-reverse))`,
+        },
+      }),
+    },
     rotate: {
       transform(value) {
         if (value !== "auto") return { rotate: deg(value) }
@@ -735,7 +819,7 @@ export const defaultBaseConfig = defineConfig({
     fontWeight: { values: "fontWeights" },
     lineHeight: { values: "lineHeights" },
     letterSpacing: { values: "letterSpacings" },
-    truncated: {
+    truncate: {
       values: { type: "boolean" },
       transform(value) {
         if (value === true) {
@@ -748,15 +832,18 @@ export const defaultBaseConfig = defineConfig({
         return {}
       },
     },
-    noOfLines: {
+    lineClamp: {
       transform(value) {
+        if (value === "none") {
+          return {
+            WebkitLineClamp: "unset",
+          }
+        }
         return {
-          display: "-webkit-box",
-          WebkitBoxOrient: "vertical",
-          WebkitLineClamp: "var(--line-clamp)",
-          "--line-clamp": value,
           overflow: "hidden",
-          textOverflow: "ellipsis",
+          display: "-webkit-box",
+          WebkitLineClamp: value,
+          WebkitBoxOrient: "vertical",
         }
       },
     },

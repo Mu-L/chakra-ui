@@ -4,7 +4,16 @@
 
 ### General
 
-- Changed Naming convention for boolean properties from `is<X>` to `<x>`
+- Removed dependency on `@emotion/styled` and `framer-motion`. You now only need
+  `@emotion/react` as peer dependencies
+
+- Improved reconciliation performance by `4x` and re-render performance by
+  `1.6x`. (TODO: Attach profiler screenshots)
+
+- Default color palette is now gray for all components but you can configure
+  this in your theme.
+
+- Changed naming convention for boolean properties from `is<X>` to `<x>`
 
   - isOpen -> open
   - defaultIsOpen -> defaultOpen
@@ -14,6 +23,139 @@
 
 - Introduce new `unstyled` prop to every component to allow for unstyled
   rendering of the component or its parts
+
+- Gradient style prop simplified to `gradient` and `gradientFrom` and
+  `gradientTo` props. This reduces the runtime performance cost of parsing the
+  gradient string, and allows for better type inference.
+
+Before:
+
+```tsx
+<Box bgGradient="linear(to-r, red.200, pink.500)" />
+```
+
+After:
+
+```tsx
+<Box bgGradient="to-r" gradientFrom="red.200" gradientTo="pink.500" />
+```
+
+- `colorScheme` is now `colorPalette`: Prior to this change, the `colorScheme`
+  prop could only be used in a component's theme. This has been changed to
+  `colorPalette` to better reflect the purpose of the prop and can be used
+  anywhere.
+
+Before:
+
+```tsx
+<Button colorScheme="blue">Click me</Button>
+```
+
+After:
+
+```tsx
+<Button colorPalette="blue">Click me</Button>
+```
+
+Usage in any component, you can do something like:
+
+```tsx
+<Box colorPalette="red">
+  <Box bg="colorPalette.400">Some box</Box>
+  <Text color="colorPalette.600">Some text</Text>
+</Box>
+```
+
+Default theme color palette size has been increased to 11 shades to allow more
+color variations.
+
+Before:
+
+```tsx
+const colors = {
+  ...
+
+  gray: {
+    50: "#F7FAFC",
+    100: "#EDF2F7",
+    200: "#E2E8F0",
+    300: "#CBD5E0",
+    400: "#A0AEC0",
+    500: "#718096",
+    600: "#4A5568",
+    700: "#2D3748",
+    800: "#1A202C",
+    900: "#171923",
+  },
+
+  ...
+```
+
+After:
+
+```tsx
+const colors = {
+  ...
+
+  gray: {
+    50: { value: "#fafafa" },
+    100: { value: "#f4f4f5" },
+    200: { value: "#e4e4e7" },
+    300: { value: "#d4d4d8" },
+    400: { value: "#a1a1aa" },
+    500: { value: "#71717a" },
+    600: { value: "#52525b" },
+    700: { value: "#3f3f46" },
+    800: { value: "#27272a" },
+    900: { value: "#18181b" },
+    950: { value: "#09090b" },
+  },
+
+  ...
+```
+
+- Changed `noOfLines` prop to `lineClamp`
+- Changed `truncated` to `truncate`
+
+### Theme Tools
+
+We've removed this package in favor using CSS color mix.
+
+#### `transparentize`
+
+**Before:** We use JS to resolve the colors and then apply the transparency
+
+```jsx
+defineStyle({
+  bg: transparentize("blue.200", 0.16)(theme), // -> rgba(0, 0, 255, 0.16)
+})
+```
+
+**After:** We use CSS color-mix
+
+```jsx
+defineStyle({
+  bg: "blue.200/16", // -> color-mix(in srgb, var(--chakra-colors-200), transparent 16%)
+})
+```
+
+#### `mode`
+
+**Before:** We use JS to resolve the colors and then apply the mode
+
+```jsx
+defineStyle({
+  color: mode("gray.800", "gray.200")(props),
+})
+```
+
+**After:** We use native css selectors instead
+
+```jsx
+defineStyle({
+  color: { _light: "gray.800", _dark: "gray.200" },
+})
+```
 
 ### Changes to `Show` and `Hide`
 
@@ -147,6 +289,8 @@ After:
 
 ### Avatar
 
+- Decompose `Avatar` into `Avatar.Root`, `Avatar.Image`, and `Avatar.Fallback`
+
 Before:
 
 ```tsx
@@ -156,9 +300,48 @@ Before:
 After:
 
 ```tsx
-<Avatar.Root name="Dan Abrahmov" src="https://bit.ly/dan-abramov">
-  <Avatar.Image />
-  <Avatar.Fallback />
+<Avatar.Root>
+  <Avatar.Image src="https://bit.ly/dan-abramov" />
+  <Avatar.Fallback>DA</Avatar.Fallback>
+</Avatar.Root>
+```
+
+- Removed `AvatarGroup` in favor of using the `Group` component and setting the
+  `spaceX` prop
+
+Before
+
+```tsx
+<AvatarGroup>
+  <Avatar name="Baba Lee" src="..." />
+  <Avatar name="Kent Dodds" />
+</AvatarGroup>
+```
+
+After
+
+```jsx
+<Group gap="0" spaceX="-3">
+  <Avatar.Root size={size}>
+    <Avatar.Image src="..." />
+    <Avatar.Fallback>BA</Avatar.Fallback>
+  </Avatar.Root>
+
+  <Avatar.Root size={size} variant="solid">
+    <Avatar.Fallback>+3</Avatar.Fallback>
+  </Avatar.Root>
+</Group>
+```
+
+- Removed `AvatarBadge` in factor of using the `Floating` component. This makes
+  it easier to use other elements like smaller avatars or icons as badges.
+
+```tsx
+<Avatar.Root colorPalette="green" variant="subtle">
+  <Avatar.Fallback>DA</Avatar.Fallback>
+  <Float placement="bottom-end" offsetX="1" offsetY="1">
+    <Circle bg="green.500" size="8px" outline="0.2em solid" outlineColor="bg" />
+  </Float>
 </Avatar.Root>
 ```
 
@@ -305,29 +488,37 @@ However, you can still get back to the legacy API by creating a custom
 component.
 
 ```tsx
-import { Tooltip } from "@chakra-ui/react"
+import { Tooltip as ChakraTooltip, Portal } from "@chakra-ui/react"
+import { forwardRef } from "react"
 
-export type CustomTooltipProps = Tooltip.RootProps & {
-  label?: string
-  hasArrow?: boolean
+export interface TooltipProps extends ChakraTooltip.RootProps {
+  showArrow?: boolean
+  portalled?: boolean
+  label?: React.ReactNode
 }
 
-const CustomTooltip = (props: Props) => {
-  const { label, children, hasArrow, ...localProps } = props
-  const [rootProps, contentProps] = Tooltip.splitProps(localProps)
-
-  return (
-    <Tooltip.Root placement="bottom" {...rootProps}>
-      <Tooltip.Trigger asChild>
-        {isValidElement(children) ? children : <span>{children}</span>}
-      </Tooltip.Trigger>
-      <Tooltip.Content {...contentProps}>
-        {hasArrow && <Tooltip.Arrow />}
-        {label}
-      </Tooltip.Content>
-    </Tooltip.Root>
-  )
-}
+export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
+  function Tooltip(props, ref) {
+    const { showArrow, children, portalled, label, ...rest } = props
+    return (
+      <ChakraTooltip.Root {...rest}>
+        <ChakraTooltip.Trigger asChild>{children}</ChakraTooltip.Trigger>
+        <Portal disabled={!portalled}>
+          <ChakraTooltip.Positioner>
+            <ChakraTooltip.Content ref={ref}>
+              {showArrow && (
+                <ChakraTooltip.Arrow>
+                  <ChakraTooltip.ArrowTip />
+                </ChakraTooltip.Arrow>
+              )}
+              {label}
+            </ChakraTooltip.Content>
+          </ChakraTooltip.Positioner>
+        </Portal>
+      </ChakraTooltip.Root>
+    )
+  },
+)
 ```
 
 - Remove `closeOnMouseDown`, use `closeOnPointerDown` instead
@@ -339,12 +530,12 @@ Form control has now been renamed to `Field` to better reflect its purpose as an
 element that represents a form field.
 
 ```tsx
-<Field.Root id="first-name" isRequired isInvalid>
-  <Field.Label>First name</Field.Label>
+<Field id="first-name" required invalid>
+  <Label>First name</Label>
   <Input placeholder="First Name" />
-  <Field.HelpText>Keep it very short and sweet!</Field.HelpText>
-  <Field.ErrorMessage>Your First name is invalid</Field.ErrorMessage>
-</Field.Root>
+  <HelpText>Keep it very short and sweet!</HelpText>
+  <ErrorMessage>Your First name is invalid</ErrorMessage>
+</Field>
 ```
 
 HelperText has been renamed to `Field.HelpText` for brevity.
@@ -590,6 +781,14 @@ the theme keys.
 - Renamed `Tfoot` to `Table.Footer`
 - Renamed `isNumeric` to `numeric`
 
+- Remove `numeric` from `TableColumnHeader` in favor of applying the
+  `text-align` css property directly.
+
+- Rename `TableOverflow` to `TableScrollArea`
+
+- Remove `placement` prop from `TableCaption` in favor of setting the
+  `caption-side` css property directly.
+
 ### Menu
 
 - Removed `rootProps` in favor of rendering the `Menu.Positioner` component
@@ -681,6 +880,17 @@ const Demo = () => {
 
 ## Theming
 
+We've removed support for functions in the theme object due to the performance
+implications.
+
+> NOTE 🚨: We now require the theme to serializable.
+
+Consider the following approach instead:
+
+- Use the `data-*` attribute to store dynamic values and style them using CSS
+- Design the dynamic property/value in the recipe
+- Leverage `compoundVariants` to create complex variants overrides
+
 ### chakra factory
 
 The `chakra` factory has been recipes to make it easier to style components
@@ -723,15 +933,6 @@ const Alert = chakra("div", {
 })
 ```
 
-We've also removed support for functions in the theme object due to the
-performance implications.
-
-Consider the following approach instead:
-
-- Use the `data-*` attribute to store dynamic values and style them using CSS
-- Design the dynamic property/value in the recipe
-- Leverage `compoundVariants` to create complex variants overrides
-
 ### Style Config
 
 We've renamed `useStyleConfig` to `useRecipe`, and `useMultiStyleConfig` to
@@ -755,7 +956,7 @@ After:
 import { chakra, useRecipe } from "@chakra-ui/react"
 
 function Alert(props) {
-  const recipe = useRecipe("Alert", props.recipe)
+  const recipe = useRecipe("alert", props.recipe)
   const [variantProps, elementProps] = recipe.splitVariantProps(props)
   return <chakra.div {...elementProps} css={recipe(variantProps)} />
 }
@@ -785,7 +986,7 @@ After:
 import { chakra, useSlotRecipe } from "@chakra-ui/react"
 
 function Alert(props) {
-  const recipe = useSlotRecipe("Alert", props.recipe)
+  const recipe = useSlotRecipe("alert", props.recipe)
   const [variantProps, elementProps] = recipe.splitVariantProps(props)
   const styles = recipe(variantProps)
   return (
@@ -868,6 +1069,7 @@ and `withThemeByClassName` helper.
 - Remove `top-accent` and `left-accent` in favor adding `borderLeft` and
   `borderTop` directly to the `Alert` component
 - Added new outline variant
+- Rename `AlertIcon` to `AlertIndicator` for consistency
 
 ## Tabs
 
@@ -876,15 +1078,10 @@ and `withThemeByClassName` helper.
 - Added `plain` variant for usage with `Tabs.Indicator`
 - Changed `isManual` to `activationMode=manual`
 
-## General
-
-- Default color palette is now gray for all components but you can configure
-  this in your theme.
-
 ## Progress
 
-- Move `hasStripe` and `isAnimated` to the `decoration` variant in recipe. Value
-  can be either `striped` or `striped-animated`
+- Move `striped` and `animated` to the `decoration` variant in recipe. Value can
+  be either `striped` or `striped-animated`
 - label or valueText no longer comes with a color by default, you can style
   yourself
 
@@ -1146,3 +1343,55 @@ toast({
 - Environment is no longer automatically provided by `ChakraProvider`. You must
   wrap your app in `Environment` to use it and provide the `getRootNode`
   function
+
+### Collapse
+
+- Rename `Collapse` to `Collapsible` namespace
+- Rename `in` to `open`
+- `animateOpacity` has been removed, use keyframes animations `expand-height`
+  and `collapse-height` instead
+
+Before:
+
+```tsx
+<Collapse in={isOpen} animateOpacity>
+  Some content
+</Collapse>
+```
+
+After:
+
+```tsx
+<Collapsible.Root open={isOpen}>
+  <Collapsible.Content>Some content</Collapsible.Content>
+</Collapsible.Root>
+```
+
+### Next.js Optimization
+
+If you notice an error similar to
+
+```sh
+[webpack.cache.PackFileCacheStrategy] Serializing big strings (140kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+```
+
+You can fix this by adding the following to your `next.config.js` file
+
+```js
+const nextConfig = {
+  experimental: {
+    optimizePackageImports: ["@chakra-ui/react"],
+  },
+}
+```
+
+If you're not getting autocompletions for style props for compound components,
+you can fix this by adding the following to your `tsconfig.json` file
+
+```json
+{
+  "compilerOptions": {
+    "moduleResolution": "Bundler"
+  }
+}
+```

@@ -9,7 +9,7 @@ const DemoSlider = (props: Slider.RootProps) => {
     <Slider.Root defaultValue={[50]} {...props}>
       <Slider.Control>
         <Slider.Track>
-          <Slider.FilledTrack />
+          <Slider.Range />
         </Slider.Track>
         <Slider.Thumb index={0} />
       </Slider.Control>
@@ -29,7 +29,7 @@ export default {
 } satisfies Meta
 
 export const Variants = () => {
-  const recipe = useSlotRecipe("Slider")
+  const recipe = useSlotRecipe("slider")
   return (
     <PlaygroundTable>
       <thead>
@@ -74,7 +74,7 @@ export const Variants = () => {
 }
 
 export const Sizes = () => {
-  const recipe = useSlotRecipe("Slider")
+  const recipe = useSlotRecipe("slider")
   return (
     <PlaygroundTable>
       <thead>
@@ -117,7 +117,7 @@ export const RangeSlider = () => {
       <Slider.Label fontWeight="medium">Price Range</Slider.Label>
       <Slider.Control>
         <Slider.Track>
-          <Slider.FilledTrack />
+          <Slider.Range />
         </Slider.Track>
         <Slider.Thumb index={0} />
         <Slider.Thumb index={1} />

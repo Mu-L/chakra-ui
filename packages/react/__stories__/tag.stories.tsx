@@ -1,6 +1,5 @@
 import { HiCheck, HiOutlineBriefcase, HiX } from "react-icons/hi"
-import { Avatar, Box, For, Span, Stack, Tag } from "../src"
-import { useSlotRecipe } from "../src/styled-system"
+import { Avatar, Box, For, Span, Stack, Tag, useSlotRecipe } from "../src"
 import { colorPalettes } from "./shared/color-palettes"
 import { PlaygroundTable } from "./shared/playground-table"
 
@@ -10,7 +9,7 @@ export default {
 }
 
 export const Variants = () => {
-  const recipe = useSlotRecipe("Tag")
+  const recipe = useSlotRecipe("tag")
   return (
     <PlaygroundTable>
       <thead>
@@ -62,7 +61,7 @@ export const Variants = () => {
                       >
                         <Avatar.Root size="xs">
                           <Avatar.Image src="https://bit.ly/dan-abramov" />
-                          <Avatar.Fallback name="Dan Abrahmov" />
+                          <Avatar.Fallback>DA</Avatar.Fallback>
                         </Avatar.Root>
                         <Tag.Label> Dan Abramov</Tag.Label>
                       </Tag.Root>
@@ -79,7 +78,7 @@ export const Variants = () => {
 }
 
 export const Sizes = () => {
-  const recipe = useSlotRecipe("Tag")
+  const recipe = useSlotRecipe("tag")
   return (
     <PlaygroundTable>
       <thead>
@@ -117,52 +116,17 @@ export const Sizes = () => {
   )
 }
 
-// export const WithStartIcon = () => (
-//   <Tag.Root colorPalette="cyan">
-//     <Icon as={HiPlus} w="12px" h="12px" />
-//     <Tag.Label>Green</Tag.Label>
-//   </Tag.Root>
-// )
-
-// export const WithEndIcon = () => (
-//   <Tag.Root colorPalette="cyan">
-//     <Tag.Label>Green</Tag.Label>
-//     <Icon as={HiPlus} w="12px" h="12px" />
-//   </Tag.Root>
-// )
-
-// export const WithCloseTrigger = () => (
-//   <>
-//     <Tag.Root variant="solid" size="sm" colorPalette="cyan">
-//       <Tag.Label>Tab Label</Tag.Label>
-//       <Tag.CloseTrigger />
-//     </Tag.Root>
-
-//     <Tag.Root variant="solid" size="md" colorPalette="cyan">
-//       <Tag.Label>Tab Label</Tag.Label>
-//       <Tag.CloseTrigger />
-//     </Tag.Root>
-
-//     <Tag.Root variant="solid" size="lg" colorPalette="cyan">
-//       <Tag.Label>Tab Label</Tag.Label>
-//       <Tag.CloseTrigger />
-//     </Tag.Root>
-//   </>
-// )
-
-// export const WithCustomElement = () => (
-//   <Tag.Root size="lg" colorPalette="red" borderRadius="full">
-//     <Avatar.Root
-//       src="https://bit.ly/sage-adebayo"
-//       size="xs"
-//       name="Segun Adebayo"
-//       marginLeft={-1}
-//       marginRight={2}
-//     >
-//       <Avatar.Image />
-//       <Avatar.Fallback />
-//     </Avatar.Root>
-//     <Tag.Label>Segun</Tag.Label>
-//     <Tag.CloseTrigger />
-//   </Tag.Root>
-// )
+export const Overflow = () => {
+  return (
+    <Tag.Root size="sm" colorPalette="blue" maxW="200px">
+      <Tag.Label>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+        molestias, laboriosam, quod, quia quidem quae voluptatem natus
+        exercitationem autem quibusdam
+      </Tag.Label>
+      <Tag.CloseTrigger>
+        <HiX />
+      </Tag.CloseTrigger>
+    </Tag.Root>
+  )
+}

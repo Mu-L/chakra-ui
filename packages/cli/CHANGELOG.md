@@ -1,5 +1,70 @@
 # @chakra-ui/cli
 
+## 3.0.0-next.10
+
+### Minor Changes
+
+- [`758f226`](https://github.com/chakra-ui/chakra-ui/commit/758f226e941e4ac9b644a5ab5a4900c2db728c28)
+  Thanks [@segunadebayo](https://github.com/segunadebayo)! - Add support for
+  `composition` command in CLI to import ready-made compositions for faster
+  development experience.
+
+  ```sh
+  Usage: chakra-ui composition [options] [command]
+
+  Add compositions to your project for better DX
+
+  Options:
+    -h, --help                     display help for command
+
+  Commands:
+    add [options] [components...]  Add a new composition for better DX
+    list                           List all compositions
+    help [command]                 display help for command
+  ```
+
+## 3.0.0-next.9
+
+### Minor Changes
+
+- [`77fe01d`](https://github.com/chakra-ui/chakra-ui/commit/77fe01d3de6e07936998acce37d6f2e7d34c25ed)
+  Thanks [@segunadebayo](https://github.com/segunadebayo)! - Change CLI name and
+  command structure.
+
+  - Change the CLI name from `chakra-cli` to `chakra`.
+  - Change `tokens` command to `typegen` to better reflect its purpose since its
+    generates types for more than just the tokens.
+  - Scaffold new `composition` command to help users scaffold new compositions
+    easily. Compositions are snippets of Chakra UI component composition them
+    easier to reuse across projects.
+
+## 3.0.0-next.8
+
+## 3.0.0-next.7
+
+### Minor Changes
+
+- [`4ff153f`](https://github.com/chakra-ui/chakra-ui/commit/4ff153fd9b449d3e43561b7daceaadfe3c925b08)
+  Thanks [@segunadebayo](https://github.com/segunadebayo)! - Speed up
+  intellisence for style props, and add support for `strictTokens` in the CLI.
+
+## 3.0.0-next.6
+
+## 3.0.0-next.5
+
+### Minor Changes
+
+- [#8569](https://github.com/chakra-ui/chakra-ui/pull/8569)
+  [`eb26857`](https://github.com/chakra-ui/chakra-ui/commit/eb2685735e25d6790d14d28653c792b9572c080e)
+  Thanks [@isBatak](https://github.com/isBatak)! - Fix the `boxSize` type to
+  allow number values.
+
+## 3.0.0-next.4
+
+## 3.0.0-next.3
+
+## 3.0.0-next.2
+
 ## 3.0.0-next.1
 
 ## 3.0.0-next.0

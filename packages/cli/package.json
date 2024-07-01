@@ -1,6 +1,6 @@
 {
   "name": "@chakra-ui/cli",
-  "version": "3.0.0-next.1",
+  "version": "3.0.0-next.10",
   "description": "Generate theme typings for autocomplete",
   "keywords": [
     "theme",
@@ -34,7 +34,7 @@
     "url": "https://github.com/chakra-ui/chakra-ui/issues"
   },
   "bin": {
-    "chakra-cli": "bin/index.js"
+    "chakra": "bin/index.js"
   },
   "scripts": {
     "clean": "rimraf dist .turbo",
@@ -44,12 +44,20 @@
     "typecheck": " tsc --noEmit"
   },
   "dependencies": {
-    "@pandacss/is-valid-prop": "0.40.0",
+    "@antfu/ni": "^0.21.12",
     "@clack/prompts": "0.7.0",
+    "@pandacss/is-valid-prop": "0.41.0",
+    "@types/cli-table": "^0.3.4",
+    "@visulima/boxen": "^1.0.10",
     "bundle-n-require": "1.1.1",
     "chokidar": "3.6.0",
-    "commander": "12.0.0",
-    "prettier": "3.2.5"
+    "cli-table": "^0.3.11",
+    "commander": "12.1.0",
+    "https-proxy-agent": "^7.0.5",
+    "node-fetch": "3.3.2",
+    "prettier": "3.3.2",
+    "sucrase": "^3.35.0",
+    "zod": "^3.23.8"
   },
   "peerDependencies": {
     "@chakra-ui/react": ">=3.0.0-next.0"

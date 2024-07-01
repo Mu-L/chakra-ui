@@ -1,3 +1,5 @@
+"use client"
+
 import { Dialog as ArkDialog } from "@ark-ui/react/dialog"
 import {
   type HTMLChakraProps,
@@ -12,7 +14,7 @@ const {
   withRootProvider,
   withContext,
   useStyles: useDialogStyles,
-} = createStyleContext("Dialog")
+} = createStyleContext("dialog")
 
 export { useDialogStyles }
 
@@ -20,8 +22,10 @@ export { useDialogStyles }
 
 export interface DialogRootProps
   extends ArkDialog.RootProps,
-    SlotRecipeProps<"Dialog">,
-    UnstyledProp {}
+    SlotRecipeProps<"dialog">,
+    UnstyledProp {
+  children: React.ReactNode
+}
 
 export const DialogRoot = withRootProvider<DialogRootProps>(ArkDialog.Root, {
   defaultProps: { unmountOnExit: true, lazyMount: true },
@@ -30,7 +34,7 @@ export const DialogRoot = withRootProvider<DialogRootProps>(ArkDialog.Root, {
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface DialogTriggerProps
-  extends HTMLChakraProps<"button", ArkDialog.TriggerProps> {}
+  extends HTMLChakraProps<"button", ArkDialog.TriggerBaseProps> {}
 
 export const DialogTrigger = withContext<HTMLButtonElement, DialogTriggerProps>(
   ArkDialog.Trigger,
@@ -41,7 +45,7 @@ export const DialogTrigger = withContext<HTMLButtonElement, DialogTriggerProps>(
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface DialogPositionerProps
-  extends HTMLChakraProps<"div", ArkDialog.PositionerProps> {}
+  extends HTMLChakraProps<"div", ArkDialog.PositionerBaseProps> {}
 
 export const DialogPositioner = withContext<
   HTMLDivElement,
@@ -51,7 +55,7 @@ export const DialogPositioner = withContext<
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface DialogContentProps
-  extends HTMLChakraProps<"section", ArkDialog.ContentProps> {}
+  extends HTMLChakraProps<"section", ArkDialog.ContentBaseProps> {}
 
 export const DialogContent = withContext<HTMLDivElement, DialogContentProps>(
   ArkDialog.Content,
@@ -62,7 +66,7 @@ export const DialogContent = withContext<HTMLDivElement, DialogContentProps>(
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface DialogDescriptionProps
-  extends HTMLChakraProps<"p", ArkDialog.DescriptionProps> {}
+  extends HTMLChakraProps<"p", ArkDialog.DescriptionBaseProps> {}
 
 export const DialogDescription = withContext<
   HTMLDivElement,
@@ -72,7 +76,7 @@ export const DialogDescription = withContext<
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface DialogTitleProps
-  extends HTMLChakraProps<"h2", ArkDialog.TitleProps> {}
+  extends HTMLChakraProps<"h2", ArkDialog.TitleBaseProps> {}
 
 export const DialogTitle = withContext<HTMLDivElement, DialogTitleProps>(
   ArkDialog.Title,
@@ -83,7 +87,7 @@ export const DialogTitle = withContext<HTMLDivElement, DialogTitleProps>(
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface DialogCloseTriggerProps
-  extends HTMLChakraProps<"button", ArkDialog.CloseTriggerProps> {}
+  extends HTMLChakraProps<"button", ArkDialog.CloseTriggerBaseProps> {}
 
 export const DialogCloseTrigger = withContext<
   HTMLButtonElement,
@@ -93,7 +97,7 @@ export const DialogCloseTrigger = withContext<
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface DialogBackdropProps
-  extends HTMLChakraProps<"div", ArkDialog.BackdropProps> {}
+  extends HTMLChakraProps<"div", ArkDialog.BackdropBaseProps> {}
 
 export const DialogBackdrop = withContext<HTMLDivElement, DialogBackdropProps>(
   ArkDialog.Backdrop,

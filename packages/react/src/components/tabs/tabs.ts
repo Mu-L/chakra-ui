@@ -14,15 +14,15 @@ const {
   withProvider,
   withContext,
   useStyles: useTabsStyles,
-} = createStyleContext("Tabs")
+} = createStyleContext("tabs")
 
 export { useTabsStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface TabsRootProps
-  extends HTMLChakraProps<"div", ArkTabs.RootProps>,
-    SlotRecipeProps<"Tabs">,
+  extends HTMLChakraProps<"div", ArkTabs.RootBaseProps>,
+    SlotRecipeProps<"tabs">,
     UnstyledProp {}
 
 export const TabsRoot = withProvider<HTMLDivElement, TabsRootProps>(
@@ -34,7 +34,7 @@ export const TabsRoot = withProvider<HTMLDivElement, TabsRootProps>(
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface TabsTriggerProps
-  extends HTMLChakraProps<"button", ArkTabs.TriggerProps> {}
+  extends HTMLChakraProps<"button", ArkTabs.TriggerBaseProps> {}
 
 export const TabsTrigger = withContext<HTMLButtonElement, TabsTriggerProps>(
   ArkTabs.Trigger,
@@ -45,7 +45,7 @@ export const TabsTrigger = withContext<HTMLButtonElement, TabsTriggerProps>(
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface TabsContentProps
-  extends HTMLChakraProps<"div", ArkTabs.ContentProps> {}
+  extends HTMLChakraProps<"div", ArkTabs.ContentBaseProps> {}
 
 export const TabsContent = withContext<HTMLDivElement, TabsContentProps>(
   ArkTabs.Content,
@@ -65,7 +65,7 @@ export const TabsContentGroup = withContext<
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface TabsListProps
-  extends HTMLChakraProps<"div", ArkTabs.ListProps> {}
+  extends HTMLChakraProps<"div", ArkTabs.ListBaseProps> {}
 
 export const TabsList = withContext<HTMLDivElement, TabsListProps>(
   ArkTabs.List,
@@ -76,7 +76,7 @@ export const TabsList = withContext<HTMLDivElement, TabsListProps>(
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface TabsIndicatorProps
-  extends HTMLChakraProps<"div", ArkTabs.ListProps> {}
+  extends HTMLChakraProps<"div", ArkTabs.ListBaseProps> {}
 
 export const TabsIndicator = withContext<HTMLDivElement, TabsIndicatorProps>(
   ArkTabs.Indicator,

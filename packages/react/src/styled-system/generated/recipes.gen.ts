@@ -1,9 +1,4 @@
-import type {
-  RecipeDefinition,
-  SlotRecipeDefinition,
-  SystemRecipeFn,
-  SystemSlotRecipeFn,
-} from "../recipe.types"
+import type { RecipeDefinition, SlotRecipeDefinition, SystemRecipeFn, SystemSlotRecipeFn } from "../recipe.types"
 
 export interface BadgeVariantProps {
   variant?: "solid" | "subtle" | "outline" | "surface" | "plain"
@@ -12,7 +7,7 @@ export interface BadgeVariantProps {
 
 export interface ButtonVariantProps {
   size?: "lg" | "md" | "sm" | "xs"
-  variant?: "solid" | "subtle" | "outline" | "ghost"
+  variant?: "solid" | "subtle" | "outline" | "ghost" | "plain"
 }
 
 export interface CodeVariantProps {
@@ -23,18 +18,7 @@ export interface CodeVariantProps {
 export interface ContainerVariantProps {}
 
 export interface HeadingVariantProps {
-  size?:
-    | "xs"
-    | "sm"
-    | "md"
-    | "lg"
-    | "xl"
-    | "2xl"
-    | "3xl"
-    | "4xl"
-    | "5xl"
-    | "6xl"
-    | "7xl"
+  size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl"
 }
 
 export interface InputVariantProps {
@@ -58,22 +42,17 @@ export interface LinkVariantProps {
 
 export interface MarkVariantProps {}
 
-export interface PinInputVariantProps {
-  size?: "lg" | "md" | "sm" | "xs"
-  variant?: "outline" | "filled" | "flushed"
-}
-
 export interface SeparatorVariantProps {
   variant?: "solid" | "dashed"
   orientation?: "vertical" | "horizontal"
 }
 
 export interface SkeletonVariantProps {
-  isLoaded?: boolean
+  loaded?: boolean
   variant?: "pulse" | "shine" | "none"
 }
 
-export interface SkipLinkVariantProps {}
+export interface SkipNavLinkVariantProps {}
 
 export interface SpinnerVariantProps {
   size?: "xs" | "sm" | "md" | "lg" | "xl"
@@ -86,44 +65,67 @@ export interface TextareaVariantProps {
 
 export interface IconVariantProps {}
 
+export interface FieldVariantProps {}
+
+export interface ErrorMessageVariantProps {}
+
+export interface HelpTextVariantProps {}
+
+export interface LabelVariantProps {}
+
+export interface CheckmarkVariantProps {
+  size?: "sm" | "md" | "lg"
+  variant?: "outline" | "subtle"
+}
+
+export interface RadiomarkVariantProps {
+  variant?: "outline" | "subtle" | "classic"
+  size?: "sm" | "md" | "lg"
+}
+
 export interface ConfigRecipes {
-  Badge: SystemRecipeFn<BadgeVariantProps>
-  Button: SystemRecipeFn<ButtonVariantProps>
-  Code: SystemRecipeFn<CodeVariantProps>
-  Container: SystemRecipeFn<ContainerVariantProps>
-  Heading: SystemRecipeFn<HeadingVariantProps>
-  Input: SystemRecipeFn<InputVariantProps>
-  InputAddon: SystemRecipeFn<InputAddonVariantProps>
-  Kbd: SystemRecipeFn<KbdVariantProps>
-  Link: SystemRecipeFn<LinkVariantProps>
-  Mark: SystemRecipeFn<MarkVariantProps>
-  PinInput: SystemRecipeFn<PinInputVariantProps>
-  Separator: SystemRecipeFn<SeparatorVariantProps>
-  Skeleton: SystemRecipeFn<SkeletonVariantProps>
-  SkipLink: SystemRecipeFn<SkipLinkVariantProps>
-  Spinner: SystemRecipeFn<SpinnerVariantProps>
-  Textarea: SystemRecipeFn<TextareaVariantProps>
-  Icon: SystemRecipeFn<IconVariantProps>
+  badge: SystemRecipeFn<BadgeVariantProps>
+  button: SystemRecipeFn<ButtonVariantProps>
+  code: SystemRecipeFn<CodeVariantProps>
+  container: SystemRecipeFn<ContainerVariantProps>
+  heading: SystemRecipeFn<HeadingVariantProps>
+  input: SystemRecipeFn<InputVariantProps>
+  inputAddon: SystemRecipeFn<InputAddonVariantProps>
+  kbd: SystemRecipeFn<KbdVariantProps>
+  link: SystemRecipeFn<LinkVariantProps>
+  mark: SystemRecipeFn<MarkVariantProps>
+  separator: SystemRecipeFn<SeparatorVariantProps>
+  skeleton: SystemRecipeFn<SkeletonVariantProps>
+  skipNavLink: SystemRecipeFn<SkipNavLinkVariantProps>
+  spinner: SystemRecipeFn<SpinnerVariantProps>
+  textarea: SystemRecipeFn<TextareaVariantProps>
+  icon: SystemRecipeFn<IconVariantProps>
+  field: SystemRecipeFn<FieldVariantProps>
+  errorMessage: SystemRecipeFn<ErrorMessageVariantProps>
+  helpText: SystemRecipeFn<HelpTextVariantProps>
+  label: SystemRecipeFn<LabelVariantProps>
+  checkmark: SystemRecipeFn<CheckmarkVariantProps>
+  radiomark: SystemRecipeFn<RadiomarkVariantProps>
 }
 
 // Accordion
 
-export type AccordionSlot =
-  | "root"
-  | "item"
-  | "trigger"
-  | "content"
-  | "body"
-  | "indicator"
+export type AccordionSlot = "root" | "item" | "itemTrigger" | "itemContent" | "itemIndicator" | "itemBody"
 
 export interface AccordionVariantProps {
   variant?: "outline" | "elevated" | "contained" | "plain"
   size?: "sm" | "md" | "lg"
 }
 
+// ActionBar
+
+export type ActionBarSlot = "positioner" | "content" | "separator" | "selectionTrigger"
+
+export interface ActionBarVariantProps {}
+
 // Alert
 
-export type AlertSlot = "title" | "description" | "root" | "icon" | "spinner"
+export type AlertSlot = "title" | "description" | "root" | "indicator" | "spinner"
 
 export interface AlertVariantProps {
   status?: "info" | "warning" | "success" | "error"
@@ -133,28 +135,12 @@ export interface AlertVariantProps {
 
 // Avatar
 
-export type AvatarSlot = "group" | "root" | "image" | "fallback" | "badge"
+export type AvatarSlot = "root" | "image" | "fallback"
 
 export interface AvatarVariantProps {
   size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl"
   variant?: "solid" | "subtle"
   shape?: "square" | "rounded" | "full"
-}
-
-// Breadcrumb
-
-export type BreadcrumbSlot =
-  | "link"
-  | "currentLink"
-  | "item"
-  | "list"
-  | "root"
-  | "ellipsis"
-  | "separator"
-
-export interface BreadcrumbVariantProps {
-  variant?: "underline" | "plain"
-  size?: "sm" | "md" | "lg"
 }
 
 // Blockquote
@@ -164,6 +150,15 @@ export type BlockquoteSlot = "root" | "icon" | "content" | "caption"
 export interface BlockquoteVariantProps {
   justify?: "start" | "center" | "end"
   variant?: "subtle" | "solid" | "plain"
+}
+
+// Breadcrumb
+
+export type BreadcrumbSlot = "link" | "currentLink" | "item" | "list" | "root" | "ellipsis" | "separator"
+
+export interface BreadcrumbVariantProps {
+  variant?: "underline" | "plain"
+  size?: "sm" | "md" | "lg"
 }
 
 // Card
@@ -177,11 +172,45 @@ export interface CardVariantProps {
 
 // Checkbox
 
-export type CheckboxSlot = "control" | "indicator" | "root" | "label"
+export type CheckboxSlot = "root" | "label" | "control" | "indicator" | "group"
 
 export interface CheckboxVariantProps {
   size?: "sm" | "md" | "lg"
   variant?: "outline" | "subtle"
+}
+
+// CheckboxCard
+
+export type CheckboxCardSlot = "root" | "control" | "label" | "addon" | "indicator"
+
+export interface CheckboxCardVariantProps {
+  size?: "sm" | "md" | "lg"
+  variant?: "plain" | "subtle"
+}
+
+// CircularProgress
+
+export type CircularProgressSlot = "root" | "label" | "track" | "range" | "valueText" | "view" | "circle" | "circleTrack" | "circleRange"
+
+export interface CircularProgressVariantProps {
+  indeterminate?: boolean
+  valuePlacement?: "center"
+  size?: "xs" | "sm" | "md" | "lg"
+}
+
+// Collapsible
+
+export type CollapsibleSlot = "root" | "trigger" | "content"
+
+export interface CollapsibleVariantProps {}
+
+// DataList
+
+export type DataListSlot = "root" | "item" | "itemLabel" | "itemValue"
+
+export interface DataListVariantProps {
+  orientation?: "horizontal" | "vertical"
+  size?: "sm" | "md" | "lg"
 }
 
 // Dialog
@@ -202,25 +231,8 @@ export type DialogSlot =
 export interface DialogVariantProps {
   centered?: boolean
   scrollBehavior?: "inside" | "outside"
-  size?:
-    | "xs"
-    | "sm"
-    | "md"
-    | "lg"
-    | "xl"
-    | "2xl"
-    | "3xl"
-    | "4xl"
-    | "5xl"
-    | "6xl"
-    | "full"
-  motionPreset?:
-    | "scale"
-    | "slide-in-bottom"
-    | "slide-in-top"
-    | "slide-in-left"
-    | "slide-in-right"
-    | "none"
+  size?: "xs" | "sm" | "md" | "lg" | "xl" | "full"
+  motionPreset?: "scale" | "slide-in-bottom" | "slide-in-top" | "slide-in-left" | "slide-in-right" | "none"
 }
 
 // Drawer
@@ -241,24 +253,23 @@ export type DrawerSlot =
 export interface DrawerVariantProps {
   size?: "xs" | "sm" | "md" | "lg" | "xl" | "full"
   placement?: "start" | "end" | "top" | "bottom"
+  contained?: boolean
 }
 
 // Editable
 
-export type EditableSlot = "root" | "preview" | "input" | "textarea"
+export type EditableSlot = "root" | "area" | "label" | "preview" | "input" | "editTrigger" | "submitTrigger" | "cancelTrigger" | "control" | "textarea"
 
 export interface EditableVariantProps {}
 
-// Field
+// EmptyState
 
-export type FieldSlot =
-  | "root"
-  | "label"
-  | "requiredIndicator"
-  | "helpText"
-  | "errorMessage"
+export type EmptyStateSlot = "root" | "content" | "indicator"
 
-export interface FieldVariantProps {}
+export interface EmptyStateVariantProps {
+  size?: "lg" | "md"
+  variant?: "outline" | "plain"
+}
 
 // FileUpload
 
@@ -276,6 +287,14 @@ export type FileUploadSlot =
   | "trigger"
 
 export interface FileUploadVariantProps {}
+
+// HoverCard
+
+export type HoverCardSlot = "arrow" | "arrowTip" | "trigger" | "positioner" | "content"
+
+export interface HoverCardVariantProps {
+  size?: "xs" | "sm" | "md" | "lg"
+}
 
 // List
 
@@ -312,21 +331,25 @@ export interface MenuVariantProps {
 export type NativeSelectSlot = "root" | "field" | "indicator"
 
 export interface NativeSelectVariantProps {
-  variant?: "outline" | "filled" | "flushed"
+  variant?: "outline" | "filled"
   size?: "lg" | "md" | "sm" | "xs"
 }
 
 // NumberInput
 
-export type NumberInputSlot =
-  | "root"
-  | "field"
-  | "control"
-  | "incrementTrigger"
-  | "decrementTrigger"
+export type NumberInputSlot = "root" | "label" | "input" | "control" | "incrementTrigger" | "decrementTrigger" | "scrubber"
 
 export interface NumberInputVariantProps {
   size?: "xs" | "sm" | "md" | "lg"
+  variant?: "outline" | "filled" | "flushed"
+}
+
+// PinInput
+
+export type PinInputSlot = "root" | "label" | "input" | "control"
+
+export interface PinInputVariantProps {
+  size?: "lg" | "md" | "sm" | "xs"
   variant?: "outline" | "filled" | "flushed"
 }
 
@@ -351,47 +374,50 @@ export interface PopoverVariantProps {
   size?: "xs" | "sm" | "md" | "lg"
 }
 
-// HoverCard
-
-export type HoverCardSlot =
-  | "arrow"
-  | "arrowTip"
-  | "trigger"
-  | "positioner"
-  | "content"
-
-export interface HoverCardVariantProps {
-  size?: "xs" | "sm" | "md" | "lg"
-}
-
 // Progress
 
-export type ProgressSlot =
-  | "root"
-  | "label"
-  | "track"
-  | "range"
-  | "valueText"
-  | "view"
-  | "circle"
-  | "circleTrack"
-  | "circleRange"
+export type ProgressSlot = "root" | "label" | "track" | "range" | "valueText" | "view" | "circle" | "circleTrack" | "circleRange"
 
 export interface ProgressVariantProps {
   variant?: "outline" | "subtle"
   indeterminate?: boolean
   shape?: "square" | "rounded" | "pill"
-  hasStripe?: boolean
-  isAnimated?: boolean
+  striped?: boolean
+  animated?: boolean
   size?: "xs" | "sm" | "md" | "lg"
 }
 
-// Radio
+// RadioCard
 
-export type RadioSlot = "root" | "item" | "control" | "indicator" | "label"
+export type RadioCardSlot = "root" | "label" | "item" | "itemText" | "itemControl" | "indicator" | "itemAddon" | "itemIndicator"
 
-export interface RadioVariantProps {
+export interface RadioCardVariantProps {
+  size?: "sm" | "md" | "lg"
+  variant?: "plain" | "subtle"
+}
+
+// RadioGroup
+
+export type RadioGroupSlot = "root" | "label" | "item" | "itemText" | "itemControl" | "indicator"
+
+export interface RadioGroupVariantProps {
   variant?: "outline" | "subtle" | "classic"
+  size?: "sm" | "md" | "lg"
+}
+
+// RatingGroup
+
+export type RatingGroupSlot = "root" | "label" | "item" | "control" | "itemIndicator"
+
+export interface RatingGroupVariantProps {
+  size?: "sm" | "md" | "lg"
+}
+
+// SegmentGroup
+
+export type SegmentGroupSlot = "root" | "label" | "item" | "itemText" | "itemControl" | "indicator"
+
+export interface SegmentGroupVariantProps {
   size?: "sm" | "md" | "lg"
 }
 
@@ -408,28 +434,20 @@ export type SelectSlot =
   | "itemIndicator"
   | "itemGroup"
   | "itemGroupLabel"
+  | "list"
   | "content"
   | "root"
   | "control"
   | "valueText"
 
 export interface SelectVariantProps {
-  variant?: "outline"
+  variant?: "outline" | "filled"
   size?: "sm" | "md" | "lg"
 }
 
 // Slider
 
-export type SliderSlot =
-  | "root"
-  | "label"
-  | "thumb"
-  | "valueText"
-  | "track"
-  | "range"
-  | "control"
-  | "markerGroup"
-  | "marker"
+export type SliderSlot = "root" | "label" | "thumb" | "valueText" | "track" | "range" | "control" | "markerGroup" | "marker"
 
 export interface SliderVariantProps {
   size?: "xs" | "sm" | "md" | "lg"
@@ -439,13 +457,7 @@ export interface SliderVariantProps {
 
 // Stat
 
-export type StatSlot =
-  | "group"
-  | "root"
-  | "label"
-  | "helpText"
-  | "number"
-  | "indicator"
+export type StatSlot = "root" | "label" | "helpText" | "valueText" | "indicator"
 
 export interface StatVariantProps {
   size?: "md"
@@ -455,13 +467,17 @@ export interface StatVariantProps {
 
 export type StepsSlot =
   | "root"
+  | "list"
   | "item"
-  | "title"
-  | "description"
+  | "trigger"
   | "indicator"
   | "separator"
-  | "icon"
-  | "number"
+  | "content"
+  | "title"
+  | "description"
+  | "nextTrigger"
+  | "prevTrigger"
+  | "progress"
 
 export interface StepsVariantProps {
   orientation?: "vertical" | "horizontal"
@@ -471,7 +487,7 @@ export interface StepsVariantProps {
 
 // Switch
 
-export type SwitchSlot = "root" | "track" | "thumb" | "label"
+export type SwitchSlot = "root" | "label" | "control" | "thumb"
 
 export interface SwitchVariantProps {
   variant?: "solid" | "outline" | "raised"
@@ -480,19 +496,11 @@ export interface SwitchVariantProps {
 
 // Table
 
-export type TableSlot =
-  | "root"
-  | "header"
-  | "body"
-  | "row"
-  | "columnHeader"
-  | "cell"
-  | "footer"
-  | "caption"
+export type TableSlot = "root" | "header" | "body" | "row" | "columnHeader" | "cell" | "footer" | "caption"
 
 export interface TableVariantProps {
-  numeric?: boolean
   interactive?: boolean
+  stickyHeader?: boolean
   striped?: boolean
   showColumnBorder?: boolean
   variant?: "line" | "outline"
@@ -501,20 +509,14 @@ export interface TableVariantProps {
 
 // Tabs
 
-export type TabsSlot =
-  | "root"
-  | "trigger"
-  | "list"
-  | "content"
-  | "contentGroup"
-  | "indicator"
+export type TabsSlot = "root" | "trigger" | "list" | "content" | "contentGroup" | "indicator"
 
 export interface TabsVariantProps {
   orientation?: "vertical" | "horizontal"
   fitted?: boolean
   justify?: "start" | "center" | "end"
   size?: "sm" | "md" | "lg"
-  variant?: "line" | "enclosed" | "outline" | "plain"
+  variant?: "line" | "soft" | "enclosed" | "outline" | "plain"
 }
 
 // Tag
@@ -528,12 +530,7 @@ export interface TagVariantProps {
 
 // Toast
 
-export type ToastSlot =
-  | "root"
-  | "title"
-  | "description"
-  | "icon"
-  | "closeTrigger"
+export type ToastSlot = "root" | "title" | "description" | "icon" | "closeTrigger"
 
 export interface ToastVariantProps {
   variant?: "solid" | "raised"
@@ -541,113 +538,108 @@ export interface ToastVariantProps {
 
 // Tooltip
 
-export type TooltipSlot =
-  | "trigger"
-  | "arrow"
-  | "arrowTip"
-  | "positioner"
-  | "content"
+export type TooltipSlot = "trigger" | "arrow" | "arrowTip" | "positioner" | "content"
 
 export interface TooltipVariantProps {}
 
-// CircularProgress
+// Status
 
-export type CircularProgressSlot =
-  | "root"
-  | "label"
-  | "track"
-  | "range"
-  | "valueText"
-  | "view"
-  | "circle"
-  | "circleTrack"
-  | "circleRange"
+export type StatusSlot = "root" | "indicator"
 
-export interface CircularProgressVariantProps {
-  indeterminate?: boolean
-  valuePlacement?: "center"
-  size?: "xs" | "sm" | "md" | "lg"
+export interface StatusVariantProps {
+  size?: "sm" | "md" | "lg"
 }
 
 export interface ConfigSlotRecipes {
-  Accordion: SystemSlotRecipeFn<AccordionSlot, AccordionVariantProps>
-  Alert: SystemSlotRecipeFn<AlertSlot, AlertVariantProps>
-  Avatar: SystemSlotRecipeFn<AvatarSlot, AvatarVariantProps>
-  Breadcrumb: SystemSlotRecipeFn<BreadcrumbSlot, BreadcrumbVariantProps>
-  Blockquote: SystemSlotRecipeFn<BlockquoteSlot, BlockquoteVariantProps>
-  Card: SystemSlotRecipeFn<CardSlot, CardVariantProps>
-  Checkbox: SystemSlotRecipeFn<CheckboxSlot, CheckboxVariantProps>
-  Dialog: SystemSlotRecipeFn<DialogSlot, DialogVariantProps>
-  Drawer: SystemSlotRecipeFn<DrawerSlot, DrawerVariantProps>
-  Editable: SystemSlotRecipeFn<EditableSlot, EditableVariantProps>
-  Field: SystemSlotRecipeFn<FieldSlot, FieldVariantProps>
-  FileUpload: SystemSlotRecipeFn<FileUploadSlot, FileUploadVariantProps>
-  List: SystemSlotRecipeFn<ListSlot, ListVariantProps>
-  Menu: SystemSlotRecipeFn<MenuSlot, MenuVariantProps>
-  NativeSelect: SystemSlotRecipeFn<NativeSelectSlot, NativeSelectVariantProps>
-  NumberInput: SystemSlotRecipeFn<NumberInputSlot, NumberInputVariantProps>
-  Popover: SystemSlotRecipeFn<PopoverSlot, PopoverVariantProps>
-  HoverCard: SystemSlotRecipeFn<HoverCardSlot, HoverCardVariantProps>
-  Progress: SystemSlotRecipeFn<ProgressSlot, ProgressVariantProps>
-  Radio: SystemSlotRecipeFn<RadioSlot, RadioVariantProps>
-  Select: SystemSlotRecipeFn<SelectSlot, SelectVariantProps>
-  Slider: SystemSlotRecipeFn<SliderSlot, SliderVariantProps>
-  Stat: SystemSlotRecipeFn<StatSlot, StatVariantProps>
-  Steps: SystemSlotRecipeFn<StepsSlot, StepsVariantProps>
-  Switch: SystemSlotRecipeFn<SwitchSlot, SwitchVariantProps>
-  Table: SystemSlotRecipeFn<TableSlot, TableVariantProps>
-  Tabs: SystemSlotRecipeFn<TabsSlot, TabsVariantProps>
-  Tag: SystemSlotRecipeFn<TagSlot, TagVariantProps>
-  Toast: SystemSlotRecipeFn<ToastSlot, ToastVariantProps>
-  Tooltip: SystemSlotRecipeFn<TooltipSlot, TooltipVariantProps>
-  CircularProgress: SystemSlotRecipeFn<
-    CircularProgressSlot,
-    CircularProgressVariantProps
-  >
+  accordion: SystemSlotRecipeFn<AccordionSlot, AccordionVariantProps>
+  actionBar: SystemSlotRecipeFn<ActionBarSlot, ActionBarVariantProps>
+  alert: SystemSlotRecipeFn<AlertSlot, AlertVariantProps>
+  avatar: SystemSlotRecipeFn<AvatarSlot, AvatarVariantProps>
+  blockquote: SystemSlotRecipeFn<BlockquoteSlot, BlockquoteVariantProps>
+  breadcrumb: SystemSlotRecipeFn<BreadcrumbSlot, BreadcrumbVariantProps>
+  card: SystemSlotRecipeFn<CardSlot, CardVariantProps>
+  checkbox: SystemSlotRecipeFn<CheckboxSlot, CheckboxVariantProps>
+  checkboxCard: SystemSlotRecipeFn<CheckboxCardSlot, CheckboxCardVariantProps>
+  circularProgress: SystemSlotRecipeFn<CircularProgressSlot, CircularProgressVariantProps>
+  collapsible: SystemSlotRecipeFn<CollapsibleSlot, CollapsibleVariantProps>
+  dataList: SystemSlotRecipeFn<DataListSlot, DataListVariantProps>
+  dialog: SystemSlotRecipeFn<DialogSlot, DialogVariantProps>
+  drawer: SystemSlotRecipeFn<DrawerSlot, DrawerVariantProps>
+  editable: SystemSlotRecipeFn<EditableSlot, EditableVariantProps>
+  emptyState: SystemSlotRecipeFn<EmptyStateSlot, EmptyStateVariantProps>
+  fileUpload: SystemSlotRecipeFn<FileUploadSlot, FileUploadVariantProps>
+  hoverCard: SystemSlotRecipeFn<HoverCardSlot, HoverCardVariantProps>
+  list: SystemSlotRecipeFn<ListSlot, ListVariantProps>
+  menu: SystemSlotRecipeFn<MenuSlot, MenuVariantProps>
+  nativeSelect: SystemSlotRecipeFn<NativeSelectSlot, NativeSelectVariantProps>
+  numberInput: SystemSlotRecipeFn<NumberInputSlot, NumberInputVariantProps>
+  pinInput: SystemSlotRecipeFn<PinInputSlot, PinInputVariantProps>
+  popover: SystemSlotRecipeFn<PopoverSlot, PopoverVariantProps>
+  progress: SystemSlotRecipeFn<ProgressSlot, ProgressVariantProps>
+  radioCard: SystemSlotRecipeFn<RadioCardSlot, RadioCardVariantProps>
+  radioGroup: SystemSlotRecipeFn<RadioGroupSlot, RadioGroupVariantProps>
+  ratingGroup: SystemSlotRecipeFn<RatingGroupSlot, RatingGroupVariantProps>
+  segmentGroup: SystemSlotRecipeFn<SegmentGroupSlot, SegmentGroupVariantProps>
+  select: SystemSlotRecipeFn<SelectSlot, SelectVariantProps>
+  slider: SystemSlotRecipeFn<SliderSlot, SliderVariantProps>
+  stat: SystemSlotRecipeFn<StatSlot, StatVariantProps>
+  steps: SystemSlotRecipeFn<StepsSlot, StepsVariantProps>
+  switch: SystemSlotRecipeFn<SwitchSlot, SwitchVariantProps>
+  table: SystemSlotRecipeFn<TableSlot, TableVariantProps>
+  tabs: SystemSlotRecipeFn<TabsSlot, TabsVariantProps>
+  tag: SystemSlotRecipeFn<TagSlot, TagVariantProps>
+  toast: SystemSlotRecipeFn<ToastSlot, ToastVariantProps>
+  tooltip: SystemSlotRecipeFn<TooltipSlot, TooltipVariantProps>
+  status: SystemSlotRecipeFn<StatusSlot, StatusVariantProps>
 }
 
 export interface ConfigRecipeSlots {
-  Accordion: AccordionSlot
-  Alert: AlertSlot
-  Avatar: AvatarSlot
-  Breadcrumb: BreadcrumbSlot
-  Blockquote: BlockquoteSlot
-  Card: CardSlot
-  Checkbox: CheckboxSlot
-  Dialog: DialogSlot
-  Drawer: DrawerSlot
-  Editable: EditableSlot
-  Field: FieldSlot
-  FileUpload: FileUploadSlot
-  List: ListSlot
-  Menu: MenuSlot
-  NativeSelect: NativeSelectSlot
-  NumberInput: NumberInputSlot
-  Popover: PopoverSlot
-  HoverCard: HoverCardSlot
-  Progress: ProgressSlot
-  Radio: RadioSlot
-  Select: SelectSlot
-  Slider: SliderSlot
-  Stat: StatSlot
-  Steps: StepsSlot
-  Switch: SwitchSlot
-  Table: TableSlot
-  Tabs: TabsSlot
-  Tag: TagSlot
-  Toast: ToastSlot
-  Tooltip: TooltipSlot
-  CircularProgress: CircularProgressSlot
+  accordion: AccordionSlot
+  actionBar: ActionBarSlot
+  alert: AlertSlot
+  avatar: AvatarSlot
+  blockquote: BlockquoteSlot
+  breadcrumb: BreadcrumbSlot
+  card: CardSlot
+  checkbox: CheckboxSlot
+  checkboxCard: CheckboxCardSlot
+  circularProgress: CircularProgressSlot
+  collapsible: CollapsibleSlot
+  dataList: DataListSlot
+  dialog: DialogSlot
+  drawer: DrawerSlot
+  editable: EditableSlot
+  emptyState: EmptyStateSlot
+  fileUpload: FileUploadSlot
+  hoverCard: HoverCardSlot
+  list: ListSlot
+  menu: MenuSlot
+  nativeSelect: NativeSelectSlot
+  numberInput: NumberInputSlot
+  pinInput: PinInputSlot
+  popover: PopoverSlot
+  progress: ProgressSlot
+  radioCard: RadioCardSlot
+  radioGroup: RadioGroupSlot
+  ratingGroup: RatingGroupSlot
+  segmentGroup: SegmentGroupSlot
+  select: SelectSlot
+  slider: SliderSlot
+  stat: StatSlot
+  steps: StepsSlot
+  switch: SwitchSlot
+  table: TableSlot
+  tabs: TabsSlot
+  tag: TagSlot
+  toast: ToastSlot
+  tooltip: TooltipSlot
+  status: StatusSlot
 }
 
-export type SlotRecipeRecord<T, K> = T extends keyof ConfigRecipeSlots
-  ? Record<ConfigRecipeSlots[T], K>
-  : Record<string, K>
+export type SlotRecipeRecord<T, K> = T extends keyof ConfigRecipeSlots ? Record<ConfigRecipeSlots[T], K> : Record<string, K>
 
 export type SlotRecipeProps<T> = T extends keyof ConfigSlotRecipes
   ? ConfigSlotRecipes[T]["__type"] & { recipe?: SlotRecipeDefinition }
   : { recipe?: SlotRecipeDefinition }
 
-export type RecipeProps<T> = T extends keyof ConfigRecipes
-  ? ConfigRecipes[T]["__type"] & { recipe?: RecipeDefinition }
-  : { recipe?: RecipeDefinition }
+export type RecipeProps<T> = T extends keyof ConfigRecipes ? ConfigRecipes[T]["__type"] & { recipe?: RecipeDefinition } : { recipe?: RecipeDefinition }

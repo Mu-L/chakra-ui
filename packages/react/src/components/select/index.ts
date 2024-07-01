@@ -13,6 +13,7 @@ export {
   SelectRoot,
   SelectTrigger,
   SelectValueText,
+  useSelectStyles,
 } from "./select"
 
 export type {
@@ -32,13 +33,17 @@ export type {
   SelectValueTextProps,
 } from "./select"
 
-export { useSelectStyles } from "./select"
+export {
+  SelectContext,
+  useSelectContext,
+  useSelect,
+} from "@ark-ui/react/select"
 
-export { SelectContext } from "@ark-ui/react/select"
 export type {
   SelectHighlightChangeDetails,
   SelectOpenChangeDetails,
   SelectValueChangeDetails,
+  SelectCollectionItem,
 } from "@ark-ui/react/select"
 
 export * as Select from "./namespace"

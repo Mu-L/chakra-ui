@@ -1,5 +1,68 @@
 # Change Log
 
+## 3.0.0-next.10
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @chakra-ui/utils@3.0.0-next.10
+
+## 3.0.0-next.9
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @chakra-ui/utils@3.0.0-next.9
+
+## 3.0.0-next.8
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @chakra-ui/utils@3.0.0-next.8
+
+## 3.0.0-next.7
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @chakra-ui/utils@3.0.0-next.7
+
+## 3.0.0-next.6
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @chakra-ui/utils@3.0.0-next.6
+
+## 3.0.0-next.5
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @chakra-ui/utils@3.0.0-next.5
+
+## 3.0.0-next.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @chakra-ui/utils@3.0.0-next.4
+
+## 3.0.0-next.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @chakra-ui/utils@3.0.0-next.3
+
+## 3.0.0-next.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @chakra-ui/utils@3.0.0-next.2
+
 ## 3.0.0-next.1
 
 ### Patch Changes

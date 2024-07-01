@@ -10,7 +10,7 @@ import {
   chakra,
   useRecipe,
 } from "../../styled-system"
-import { type FieldOptions, splitFieldProps, useField } from "../field"
+import { type FieldOptions, splitFieldProps, useFieldProps } from "../field"
 
 const omitted = ["h", "minH", "height", "minHeight"] as const
 
@@ -18,7 +18,7 @@ export interface TextareaProps
   extends HTMLChakraProps<"textarea">,
     FieldOptions,
     UnstyledProp,
-    RecipeProps<"Textarea"> {}
+    RecipeProps<"textarea"> {}
 
 /**
  * Textarea is used to enter an amount of text that's longer than a single line
@@ -26,12 +26,12 @@ export interface TextareaProps
  */
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   function Textarea({ unstyled, ...props }, ref) {
-    const recipe = useRecipe("Textarea", props.recipe)
+    const recipe = useRecipe("textarea", props.recipe)
     const [variantProps, localProps] = recipe.splitVariantProps(props)
     const styles = unstyled ? EMPTY_STYLES : recipe(variantProps)
 
-    const [useFieldProps, elementProps] = splitFieldProps(localProps)
-    const fieldProps = useField<HTMLTextAreaElement>(useFieldProps)
+    const [baseFieldProps, elementProps] = splitFieldProps(localProps)
+    const fieldProps = useFieldProps<HTMLTextAreaElement>(baseFieldProps)
 
     const textareaStyles = localProps.rows ? omit(styles, omitted) : styles
 

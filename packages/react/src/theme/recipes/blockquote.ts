@@ -1,10 +1,11 @@
-import { blockquoteAnatomy as parts } from "../../anatomy"
+import { blockquoteAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
 
 export const blockquoteSlotRecipe = defineSlotRecipe({
-  slots: parts.keys,
+  slots: blockquoteAnatomy.keys(),
   base: {
     root: {
+      position: "relative",
       display: "flex",
       flexDirection: "column",
       gap: "2",
@@ -16,11 +17,17 @@ export const blockquoteSlotRecipe = defineSlotRecipe({
     },
     icon: {
       fontSize: "xl",
+      color: "colorPalette.400",
     },
   },
   variants: {
     justify: {
-      start: {},
+      start: {
+        root: {
+          alignItems: "flex-start",
+          textAlign: "start",
+        },
+      },
       center: {
         root: {
           alignItems: "center",
@@ -34,39 +41,44 @@ export const blockquoteSlotRecipe = defineSlotRecipe({
         },
       },
     },
+
     variant: {
       subtle: {
         root: {
+          paddingX: "5",
           borderStartWidth: "4px",
-          paddingStart: "4",
           borderStartColor: {
             base: "colorPalette.200",
             _dark: "colorPalette.200/40",
           },
         },
-        content: {
-          color: { base: "colorPalette.900", _dark: "colorPalette.300" },
-        },
         icon: {
-          color: { base: "colorPalette.900", _dark: "colorPalette.300" },
+          color: "colorPalette.400",
         },
       },
+
       solid: {
         root: {
-          paddingStart: "4",
+          paddingX: "5",
           borderStartWidth: "4px",
           borderStartColor: "colorPalette.600",
         },
-        content: {
-          color: { base: "colorPalette.900", _dark: "colorPalette.300" },
-        },
         icon: {
-          color: { base: "colorPalette.900", _dark: "colorPalette.300" },
+          color: "colorPalette.600",
         },
       },
-      plain: {},
+
+      plain: {
+        root: {
+          paddingX: "6",
+        },
+        icon: {
+          color: "colorPalette.600",
+        },
+      },
     },
   },
+
   defaultVariants: {
     variant: "subtle",
     justify: "start",

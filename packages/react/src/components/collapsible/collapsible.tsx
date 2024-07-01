@@ -1,3 +1,5 @@
+"use client"
+
 import { Collapsible as ArkCollapsible } from "@ark-ui/react/collapsible"
 import {
   type HTMLChakraProps,
@@ -12,15 +14,15 @@ const {
   withProvider,
   withContext,
   useStyles: useCollapsibleStyles,
-} = createStyleContext("Collapsible")
+} = createStyleContext("collapsible")
 
 export { useCollapsibleStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface CollapsibleRootProps
-  extends HTMLChakraProps<"div", ArkCollapsible.RootProps>,
-    SlotRecipeProps<"Collapsible">,
+  extends HTMLChakraProps<"div", ArkCollapsible.RootBaseProps>,
+    SlotRecipeProps<"collapsible">,
     UnstyledProp {}
 
 export const CollapsibleRoot = withProvider<
@@ -31,7 +33,7 @@ export const CollapsibleRoot = withProvider<
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface CollapsibleTriggerProps
-  extends HTMLChakraProps<"button", ArkCollapsible.TriggerProps> {}
+  extends HTMLChakraProps<"button", ArkCollapsible.TriggerBaseProps> {}
 
 export const CollapsibleTrigger = withContext<
   HTMLButtonElement,
@@ -41,7 +43,7 @@ export const CollapsibleTrigger = withContext<
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface CollapsibleContentProps
-  extends HTMLChakraProps<"div", ArkCollapsible.ContentProps> {}
+  extends HTMLChakraProps<"div", ArkCollapsible.ContentBaseProps> {}
 
 export const CollapsibleContent = withContext<
   HTMLDivElement,

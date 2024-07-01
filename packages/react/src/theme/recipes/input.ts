@@ -9,15 +9,10 @@ export const inputRecipe = defineRecipe({
     appearance: "none",
     colorPalette: "gray",
     _disabled: {
-      opacity: 0.5,
-      cursor: "not-allowed",
+      layerStyle: "disabled",
     },
-    _readOnly: {
-      boxShadow: "none !important",
-      userSelect: "all",
-    },
-    "--focus-color": "colors.colorPalette.400",
-    "--error-color": "colors.red.500",
+    "--focus-color": "colors.border.emphasized",
+    "--error-color": "colors.border.error",
   },
   variants: {
     size: {
@@ -50,7 +45,7 @@ export const inputRecipe = defineRecipe({
     },
     variant: {
       outline: {
-        border: "1px solid",
+        borderWidth: "1px",
         borderColor: "inherit",
         bg: "bg",
         _invalid: {
@@ -62,7 +57,7 @@ export const inputRecipe = defineRecipe({
         },
       },
       filled: {
-        border: "1px solid",
+        borderWidth: "1px",
         borderColor: "transparent",
         bg: { base: "gray.100", _dark: "gray.800" },
         _invalid: {
@@ -75,7 +70,7 @@ export const inputRecipe = defineRecipe({
         },
       },
       flushed: {
-        borderBottom: "1px solid",
+        borderBottomWith: "1px",
         borderColor: "inherit",
         borderRadius: "0",
         px: "0",

@@ -54,11 +54,12 @@ export function createSystem(config: SystemConfig): SystemContext {
   })
 
   function assignComposition() {
-    const { textStyles, layerStyles } = theme
+    const { textStyles, layerStyles, motionStyles } = theme
 
     const compositions = compact({
       textStyle: textStyles,
       layerStyle: layerStyles,
+      motionStyle: motionStyles,
     })
 
     for (const [key, values] of Object.entries(compositions)) {
@@ -77,6 +78,7 @@ export function createSystem(config: SystemConfig): SystemContext {
   }
 
   assignComposition()
+  utility.addPropertyType("animationName", Object.keys(theme.keyframes ?? {}))
 
   const properties = new Set(["css", ...utility.keys(), ...conditions.keys()])
 
@@ -157,7 +159,7 @@ export function createSystem(config: SystemConfig): SystemContext {
   }
 
   return {
-    $$typeof: "SystemContext",
+    $$chakra: true,
     _config: config,
     breakpoints,
     tokens,
@@ -188,4 +190,8 @@ function getTokenMap(tokens: TokenDictionary) {
   })
 
   return map
+}
+
+export const isValidSystem = (mod: unknown): mod is SystemContext => {
+  return isObject(mod) && !!Reflect.get(mod, "$$chakra")
 }

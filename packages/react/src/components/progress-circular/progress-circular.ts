@@ -14,15 +14,15 @@ const {
   withProvider,
   withContext,
   useStyles: useCircularProgressStyles,
-} = createStyleContext("CircularProgress")
+} = createStyleContext("circularProgress")
 
 export { useCircularProgressStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface CircularProgressRootProps
-  extends HTMLChakraProps<"div", ArkProgress.RootProps>,
-    SlotRecipeProps<"CircularProgress">,
+  extends HTMLChakraProps<"div", ArkProgress.RootBaseProps>,
+    SlotRecipeProps<"circularProgress">,
     UnstyledProp {}
 
 export const CircularProgressRoot = withProvider<
@@ -33,7 +33,7 @@ export const CircularProgressRoot = withProvider<
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface CircularProgressLabelProps
-  extends HTMLChakraProps<"div", ArkProgress.LabelProps> {}
+  extends HTMLChakraProps<"div", ArkProgress.LabelBaseProps> {}
 
 export const CircularProgressLabel = withContext<
   HTMLDivElement,
@@ -43,37 +43,37 @@ export const CircularProgressLabel = withContext<
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface CircularProgressCircleProps
-  extends HTMLChakraProps<"div", ArkProgress.TrackProps> {}
+  extends HTMLChakraProps<"svg", ArkProgress.CircleBaseProps> {}
 
 export const CircularProgressCircle = withContext<
-  HTMLDivElement,
+  SVGSVGElement,
   CircularProgressCircleProps
 >(ArkProgress.Circle, "circle", { forwardAsChild: true })
 
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface CircularProgressTrackProps
-  extends HTMLChakraProps<"div", ArkProgress.TrackProps> {}
+  extends HTMLChakraProps<"circle", ArkProgress.TrackBaseProps> {}
 
 export const CircularProgressTrack = withContext<
-  HTMLDivElement,
+  SVGCircleElement,
   CircularProgressTrackProps
 >(ArkProgress.CircleTrack, "circleTrack", { forwardAsChild: true })
 
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface CircularProgressRangeProps
-  extends HTMLChakraProps<"div", ArkProgress.RangeProps> {}
+  extends HTMLChakraProps<"circle", ArkProgress.RangeBaseProps> {}
 
 export const CircularProgressRange = withContext<
-  HTMLDivElement,
+  SVGCircleElement,
   CircularProgressRangeProps
 >(ArkProgress.CircleRange, "circleRange", { forwardAsChild: true })
 
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface CircularProgressValueTextProps
-  extends HTMLChakraProps<"div", ArkProgress.ValueTextProps> {}
+  extends HTMLChakraProps<"div", ArkProgress.ValueTextBaseProps> {}
 
 export const CircularProgressValueText = withContext<
   HTMLDivElement,

@@ -1,8 +1,8 @@
-import { statAnatomy as parts } from "../../anatomy"
+import { statAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
 
 export const statSlotRecipe = defineSlotRecipe({
-  slots: parts.keys,
+  slots: statAnatomy.keys(),
   base: {
     root: {
       position: "relative",
@@ -12,33 +12,47 @@ export const statSlotRecipe = defineSlotRecipe({
       fontWeight: "medium",
     },
     helpText: {
-      opacity: 0.8,
-      marginBottom: "2",
+      color: "fg.muted",
     },
-    number: {
+    valueText: {
       verticalAlign: "baseline",
       fontWeight: "semibold",
+      letterSpacing: "tight",
       fontFeatureSettings: "pnum",
       fontVariantNumeric: "proportional-nums",
     },
     indicator: {
       marginEnd: 1,
       "& svg": {
-        w: "3.5",
-        h: "3.5",
+        w: "1em",
+        h: "1em",
         verticalAlign: "middle",
+      },
+      "&[data-type=up]": {
+        color: "fg.success",
+      },
+      "&[data-type=down]": {
+        color: "fg.error",
       },
     },
   },
+
   variants: {
     size: {
       md: {
-        label: { fontSize: "sm" },
-        helpText: { fontSize: "sm" },
-        number: { fontSize: "2xl" },
+        label: {
+          fontSize: "sm",
+        },
+        helpText: {
+          fontSize: "sm",
+        },
+        valueText: {
+          fontSize: "2xl",
+        },
       },
     },
   },
+
   defaultVariants: {
     size: "md",
   },

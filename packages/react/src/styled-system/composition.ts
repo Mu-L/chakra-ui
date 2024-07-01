@@ -51,17 +51,17 @@ export type TextStyles = Recursive<Token<TextStyle>>
  * Layer styles
  * -----------------------------------------------------------------------------*/
 
-type Placement =
-  | "Top"
-  | "Right"
-  | "Bottom"
-  | "Left"
+type LogicalPlacement =
   | "Inline"
   | "Block"
   | "InlineStart"
   | "InlineEnd"
   | "BlockStart"
   | "BlockEnd"
+
+type PhysicalPlacement = "Top" | "Right" | "Bottom" | "Left"
+
+type Placement = PhysicalPlacement | LogicalPlacement
 
 type Radius =
   | `Top${"Right" | "Left"}`
@@ -73,15 +73,18 @@ type LayerStyleProperty =
   | "background"
   | "backgroundColor"
   | "backgroundImage"
+  | "content"
   | "borderRadius"
   | "border"
   | "borderWidth"
   | "borderColor"
   | "borderStyle"
   | "boxShadow"
+  | "boxShadowColor"
   | "filter"
   | "backdropFilter"
   | "transform"
+  | "cursor"
   | "color"
   | "opacity"
   | "backgroundBlendMode"
@@ -98,13 +101,46 @@ type LayerStyleProperty =
   | `border${Placement}Color`
   | `border${Placement}Style`
   | "padding"
+  | "position"
   | `padding${Placement}`
+  | "height"
+  | "width"
+  | "minHeight"
+  | "minWidth"
+  | `inset${LogicalPlacement}`
+  | Lowercase<PhysicalPlacement>
 
 export type LayerStyle = CompositionStyleObject<LayerStyleProperty>
 
 export type LayerStyles = Recursive<Token<LayerStyle>>
 
+/* -----------------------------------------------------------------------------
+ * Motion styles
+ * -----------------------------------------------------------------------------*/
+
+type MotionStyleProperty =
+  | "animation"
+  | "animationComposition"
+  | "animationDelay"
+  | "animationDirection"
+  | "animationDuration"
+  | "animationFillMode"
+  | "animationIterationCount"
+  | "animationName"
+  | "animationPlayState"
+  | "animationTimingFunction"
+  | "animationRange"
+  | "animationRangeStart"
+  | "animationRangeEnd"
+  | "animationTimeline"
+  | "transformOrigin"
+
+export type MotionStyle = CompositionStyleObject<MotionStyleProperty>
+
+export type MotionStyles = Recursive<Token<MotionStyle>>
+
 export interface CompositionStyles {
   textStyles: TextStyles
   layerStyles: LayerStyles
+  motionStyles: MotionStyles
 }

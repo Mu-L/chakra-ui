@@ -1,3 +1,5 @@
+"use client"
+
 import { FileUpload as ArkFileUpload } from "@ark-ui/react/file-upload"
 import {
   type HTMLChakraProps,
@@ -8,13 +10,19 @@ import {
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-const { withProvider, withContext } = createStyleContext("FileUpload")
+const {
+  withProvider,
+  withContext,
+  useStyles: useFileUploadStyles,
+} = createStyleContext("fileUpload")
+
+export { useFileUploadStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface FileUploadRootProps
-  extends HTMLChakraProps<"div", ArkFileUpload.RootProps>,
-    SlotRecipeProps<"FileUpload">,
+  extends HTMLChakraProps<"div", ArkFileUpload.RootBaseProps>,
+    SlotRecipeProps<"fileUpload">,
     UnstyledProp {}
 
 export const FileUploadRoot = withProvider<HTMLDivElement, FileUploadRootProps>(
@@ -26,7 +34,7 @@ export const FileUploadRoot = withProvider<HTMLDivElement, FileUploadRootProps>(
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface FileUploadDropzoneProps
-  extends HTMLChakraProps<"li", ArkFileUpload.DropzoneProps> {}
+  extends HTMLChakraProps<"li", ArkFileUpload.DropzoneBaseProps> {}
 
 export const FileUploadDropzone = withContext<
   HTMLDivElement,
@@ -36,7 +44,7 @@ export const FileUploadDropzone = withContext<
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface FileUploadItemProps
-  extends HTMLChakraProps<"li", ArkFileUpload.ItemProps> {}
+  extends HTMLChakraProps<"li", ArkFileUpload.ItemBaseProps> {}
 
 export const FileUploadItem = withContext<HTMLLIElement, FileUploadItemProps>(
   ArkFileUpload.Item,
@@ -47,7 +55,7 @@ export const FileUploadItem = withContext<HTMLLIElement, FileUploadItemProps>(
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface FileUploadItemDeleteTriggerProps
-  extends HTMLChakraProps<"button", ArkFileUpload.ItemDeleteTriggerProps> {}
+  extends HTMLChakraProps<"button", ArkFileUpload.ItemDeleteTriggerBaseProps> {}
 
 export const FileUploadItemDeleteTrigger = withContext<
   HTMLButtonElement,
@@ -59,7 +67,7 @@ export const FileUploadItemDeleteTrigger = withContext<
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface FileUploadItemGroupProps
-  extends HTMLChakraProps<"ul", ArkFileUpload.ItemGroupProps> {}
+  extends HTMLChakraProps<"ul", ArkFileUpload.ItemGroupBaseProps> {}
 
 export const FileUploadItemGroup = withContext<
   HTMLUListElement,
@@ -69,7 +77,7 @@ export const FileUploadItemGroup = withContext<
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface FileUploadItemNameProps
-  extends HTMLChakraProps<"span", ArkFileUpload.ItemNameProps> {}
+  extends HTMLChakraProps<"span", ArkFileUpload.ItemNameBaseProps> {}
 
 export const FileUploadItemName = withContext<
   HTMLSpanElement,
@@ -79,7 +87,7 @@ export const FileUploadItemName = withContext<
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface FileUploadItemPreviewProps
-  extends HTMLChakraProps<"div", ArkFileUpload.ItemPreviewProps> {}
+  extends HTMLChakraProps<"div", ArkFileUpload.ItemPreviewBaseProps> {}
 
 export const FileUploadItemPreview = withContext<
   HTMLDivElement,
@@ -89,7 +97,7 @@ export const FileUploadItemPreview = withContext<
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface FileUploadItemPreviewImageProps
-  extends HTMLChakraProps<"img", ArkFileUpload.ItemPreviewImageProps> {}
+  extends HTMLChakraProps<"img", ArkFileUpload.ItemPreviewImageBaseProps> {}
 
 export const FileUploadItemPreviewImage = withContext<
   HTMLImageElement,
@@ -99,7 +107,7 @@ export const FileUploadItemPreviewImage = withContext<
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface FileUploadItemSizeTextProps
-  extends HTMLChakraProps<"span", ArkFileUpload.ItemSizeTextProps> {}
+  extends HTMLChakraProps<"span", ArkFileUpload.ItemSizeTextBaseProps> {}
 
 export const FileUploadItemSizeText = withContext<
   HTMLSpanElement,
@@ -109,7 +117,7 @@ export const FileUploadItemSizeText = withContext<
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface FileUploadLabelProps
-  extends HTMLChakraProps<"label", ArkFileUpload.LabelProps> {}
+  extends HTMLChakraProps<"label", ArkFileUpload.LabelBaseProps> {}
 
 export const FileUploadLabel = withContext<
   HTMLLabelElement,
@@ -119,7 +127,7 @@ export const FileUploadLabel = withContext<
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface FileUploadTriggerProps
-  extends HTMLChakraProps<"button", ArkFileUpload.TriggerProps> {}
+  extends HTMLChakraProps<"button", ArkFileUpload.TriggerBaseProps> {}
 
 export const FileUploadTrigger = withContext<
   HTMLButtonElement,
